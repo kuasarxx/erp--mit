@@ -15,8 +15,21 @@ export const PERSIST_MAP = {
   notlar: `${PREFIX}notlar_v1`,
   sonPuantajTarihi: `${PREFIX}son_puantaj_tarihi`,
   egitim: 'erp_umit_egitim_v1',
+  donemler: `${PREFIX}donemler_v1`,
+  aktifDonemId: `${PREFIX}aktif_donem_id_v1`,
+  // puantaj dönem bazlıdır; anahtar statik değil — saveSlice içinde çözülür
+  puantaj: '@puantaj',
   'ui.theme': `${PREFIX}theme`,
 };
+
+/**
+ * Dönem bazlı anahtar üretimi — legacy'deki donemKey() ile birebir:
+ *   umit_erp_<donemId>_<modul>_v1
+ */
+export function periodKey(donemId, modul) {
+  if (!donemId) return null;
+  return `${PREFIX}${donemId}_${modul}_v1`;
+}
 
 export function readKey(lsKey) {
   try {
@@ -48,6 +61,11 @@ export function loadState() {
 
 /** İlgili dilimi karşılık gelen anahtara yazar. */
 export function saveSlice(stateKey, value) {
-  const lsKey = PERSIST_MAP[stateKey];
+  let lsKey = PERSIST_MAP[stateKey];
+  if (lsKey === '@puantaj') {
+    // Dönem bazlı: aktifDonemId'den çözülür
+    const donemId = readKey(`${PREFIX}aktif_donem_id_v1`);
+    lsKey = donemId ? periodKey(donemId, 'puantaj') : null;
+  }
   if (lsKey) writeKey(lsKey, value);
 }

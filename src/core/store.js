@@ -23,11 +23,22 @@ export const state = {
   },
   // --- İş modülleri (legacy anahtarlarla uyumlu) ---
   personeller: [],          // umit_erp_global_personeller_v1
-  normalSaatler: {},        // umit_erp_normal_saatler_v1
-  vardiyaKurallari: {},     // umit_erp_vardiya_kurallari_v1
+  normalSaatler: [],        // umit_erp_normal_saatler_v1 (dizi — legacy ile aynı şema)
+  vardiyaKurallari: [],     // umit_erp_vardiya_kurallari_v1 (dizi — legacy ile aynı şema)
   notlar: [],               // umit_erp_notlar_v1
   sonPuantajTarihi: null,   // umit_erp_son_puantaj_tarihi
   egitim: {},               // erp_umit_egitim_v1
+
+  // --- Dönem sistemi (legacy: donemKey = umit_erp_<donemId>_<modul>_v1) ---
+  donemler: [],             // [{id, ad, yil, ay, olusturma}]
+  aktifDonemId: null,       // ör. 'ekim-2026'
+  puantaj: {                // payState — dönem anahtarında saklanır
+    yil: new Date().getFullYear(),
+    ay: new Date().getMonth(),
+    personeller: [],        // [{id, isim, meslek, gunler:{g:değer}, notlar:{g:metin}}]
+    pazarRenk: true,
+    meslekGizli: false,
+  },
 };
 
 /** Abonelik: belirli bir state anahtarı değiştiğinde cb çalışır. */
@@ -37,16 +48,32 @@ export function subscribe(key, cb) {
   return () => listeners.get(key).delete(cb);
 }
 
+/** Nesne dilimlerini derinlemesine eşit kıyaslar (JSON tabanlı; bu ölçek için yeterli). */
+function deepEqual(a, b) {
+  if (a === b) return true;
+  try { return JSON.stringify(a) === JSON.stringify(b); } catch { return false; }
+}
+
 function notify(key) {
   listeners.get(key)?.forEach((cb) => {
     try { cb(state[key]); } catch (err) { console.error('[store] abone hatası:', err); }
   });
 }
 
-/** Bir dilimi günceller; kalıcılıksa yazar ve aboneleri uyarır. */
+/** Bir dilimi günceller; kalıcıksa yazar ve aboneleri uyarır. */
 export function setState(key, value, { persist = true } = {}) {
+  const changed = !deepEqual(state[key], value);
   state[key] = value;
-  if (persist) saveSlice(key, value);
+  if (persist && changed) saveSlice(key, value);
+  if (changed) notify(key);
+}
+
+/**
+ * Dilim içindeki nesneyi yerinde değiştirip bildirim tetikler.
+ * (Legacy'deki `payState.personeller.push(...); payKaydet()` deseninin karşılığı.)
+ */
+export function touch(key) {
+  saveSlice(key, state[key]);
   notify(key);
 }
 

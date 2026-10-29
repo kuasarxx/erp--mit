@@ -232,8 +232,16 @@
   padding: var(--space-4);
 }
 
+/* modal servisi: aç/kapat görünürlüğü */
+.modal-backdrop:not(.is-open) { display: none; }
+.modal-backdrop.is-open .modal { transform: translateY(0); opacity: 1; transition: all 180ms ease; }
+.modal-backdrop:not(.is-open) .modal { transform: translateY(8px); opacity: 0; }
+
 .modal {
-  width: min(560px, 100%);
+  width: min(640px, 100%);
+  max-height: min(88vh, 900px);
+  display: flex;
+  flex-direction: column;
   background: var(--surface-card);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
@@ -243,14 +251,17 @@
 .modal__header {
   display: flex;
   align-items: center;
+  gap: var(--space-3);
   padding: var(--space-4) var(--space-5);
   border-bottom: 1px solid var(--border-default);
+  justify-content: space-between;
 }
 
-.modal__title { font-size: var(--font-size-md); font-weight: 700; }
-.modal__body { padding: var(--space-5); }
+.modal__title { font-size: var(--font-size-md); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.modal__body { padding: var(--space-5); overflow-y: auto; }
 .modal__footer {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   gap: var(--space-3);
   padding: var(--space-4) var(--space-5);

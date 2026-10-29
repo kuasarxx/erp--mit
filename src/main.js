@@ -10,9 +10,9 @@ import { watchAuth } from './core/authService.js';
 
 // Sayfa modülleri (import edildiklerinde registerPage çağırır)
 import './pages/anasayfa.js';
+import './pages/puantaj.js';
 
 // Diğer sayfalar tek tek eklenecek (adım adım plan):
-// import './pages/puantaj.js';
 // import './pages/avans.js';
 // import './pages/mesai.js';
 // import './pages/ekstra.js';
