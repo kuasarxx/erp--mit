@@ -139,9 +139,13 @@ export function navigateTo(pageId) {
   location.hash = `#/${id}`;
 }
 
+let activeCleanup = null;
+
 async function renderPage() {
   const { mountPage } = await import('./router.js');
-  await mountPage(contentEl, state.ui.page);
+  // Önceki sayfanın temizleme fonksiyonu varsa çağır (abonelik vb. sızıntı olmasın)
+  if (typeof activeCleanup === 'function') { try { activeCleanup(); } catch { /* yoksay */ } }
+  activeCleanup = await mountPage(contentEl, state.ui.page);
 }
 
 function currentPageFromHash() {
@@ -151,15 +155,22 @@ function currentPageFromHash() {
 
 /** Hash değişimini dinle: sayfa state'ine yansıt ve render et. */
 export function startRouting() {
+  let sonSayfa = null;
   const apply = () => {
     const id = currentPageFromHash();
+    const ayniSayfa = id === sonSayfa && contentEl?.children.length;
     if (id !== state.ui.page) {
       setState('ui', { ...state.ui, page: id }, { persist: false });
     }
     refreshChrome();
-    renderPage();
+    if (!ayniSayfa) {
+      sonSayfa = id;
+      renderPage();
+    }
   };
   window.addEventListener('hashchange', apply);
+  // Dönem değişince içinde bulunulan sayfayı yeniden kur
+  window.addEventListener('donemDegisti', () => { sonSayfa = null; apply(); });
   apply();
 }
 

@@ -115,8 +115,42 @@
 /* gün başlığı */
 .pg { width: 30px; min-width: 30px; }
 .pg.is-sunday { background: var(--color-warning); }
+.pg.is-holiday { background: #7c3aed; }
 .pg__no { display: block; line-height: 1.1; font-weight: 800; }
 .pg__dow { display: block; font-size: 8px; opacity: 0.85; line-height: 1; }
+
+/* mesai toplam sütun varyantları */
+.pay-table thead .pt--hici { background: var(--color-info); }
+.pay-table thead .pt--hsonu { background: var(--color-warning); }
+.pay-table thead .pt--resmi { background: #7c3aed; }
+.pt--hici { background: rgba(3, 105, 161, 0.10); color: var(--color-info); }
+.pt--hsonu { background: rgba(180, 83, 9, 0.12); color: var(--color-warning); }
+.pt--resmi { background: rgba(124, 58, 237, 0.12); color: #7c3aed; }
+.pay-table td.is-holiday { background: rgba(124, 58, 237, 0.10); }
+.kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid var(--border-default);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--surface-sunken);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 11px;
+}
+
+/* resmi tatil modalı satırları */
+.rt-liste { display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow: auto; }
+.rt-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+}
+.rt-date { font-weight: 800; color: var(--color-info); font-variant-numeric: tabular-nums; }
+.rt-name { flex: 1; }
 
 /* toplam sütunları */
 .pt {
@@ -208,6 +242,7 @@
 .btn--success:hover { filter: brightness(1.1); }
 .btn--ghost.is-active-toggle { background: rgba(180, 83, 9, 0.12); color: var(--color-warning); }
 .select--sm { padding: 4px 8px; font-size: var(--font-size-xs); width: auto; }
+.input--sm { width: auto; padding: 5px 10px; font-size: var(--font-size-sm); }
 
 /* boş durum */
 .empty-state {
