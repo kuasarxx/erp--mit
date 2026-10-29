@@ -318,6 +318,23 @@ window.firebaseFunctions = {
       display: block
     }
 
+    /* ============ SVG İKON SİSTEMİ (Lucide stil) ============ */
+    .ic {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    #ikonKitapligi {
+      display: none !important;
+    }
+
     .tb1 {
       position: sticky;
       top: 0;
@@ -935,6 +952,47 @@ window.firebaseFunctions = {
     .kullanici-menu-btn:hover {
       background: rgba(2, 132, 199, .08);
       color: #0284c7;
+    }
+
+    .kmb-i {
+      width: 16px;
+      height: 16px;
+      opacity: .75
+    }
+
+    /* 🧩 Modern kullanıcı avatarı */
+    .tb1-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .3px;
+      color: #fff;
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 2px 6px rgba(0, 0, 0, .3);
+      flex-shrink: 0;
+      overflow: hidden;
+      user-select: none;
+      transition: transform .2s
+    }
+
+    .tb1-avatar.admin {
+      background: linear-gradient(135deg, #fbbf24, #d97706);
+      color: #fff
+    }
+
+    .tb1-avatar .ic {
+      width: 15px;
+      height: 15px;
+      stroke-width: 2.2
+    }
+
+    .tb1-btn:hover .tb1-avatar {
+      transform: scale(1.06)
     }
 
     @media(max-width:900px) {
@@ -1605,7 +1663,22 @@ window.firebaseFunctions = {
     .side-ikon {
       font-size: 18px;
       line-height: 1;
-      flex-shrink: 0
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px
+    }
+
+    .side-ikon .ic {
+      width: 19px;
+      height: 19px;
+      stroke-width: 2.1
+    }
+
+    .side-btn {
+      position: relative
     }
 
     .side-yazi {
@@ -6638,11 +6711,191 @@ tr.satir-secili td {
     padding: 12px 16px;
   }
 }
+
+    /* Buton içi ikonlar */
+    .btn-i {
+      width: 15px;
+      height: 15px;
+      stroke-width: 2.2
+    }
+
+    /* Sayfa başlığı ikonu */
+    .baslik-ikon {
+      width: 24px;
+      height: 24px;
+      color: var(--primary-light);
+      stroke-width: 2.2
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /* ✨ MODERN GÖRÜNÜM V2 — SADECE GÖRSEL (veri yok) */
+    /* ═══════════════════════════════════════════════ */
+
+    /* Kartlar: yumuşak derinlik + hover yükseltme */
+    .kart {
+      box-shadow: 0 1px 3px rgba(15, 23, 42, .06), 0 1px 2px rgba(15, 23, 42, .04);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .kart:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, .12), 0 2px 6px rgba(15, 23, 42, .06);
+    }
+
+    /* Sayfa başlıkları: ikonlu modern görünüm */
+    .header {
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .title::first-letter {
+      color: var(--primary-light);
+    }
+
+    /* Butonlar: yumuşak gölge + hafif büyüme */
+    .btn {
+      box-shadow: 0 2px 8px rgba(12, 74, 110, .18);
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(12, 74, 110, .25);
+      filter: brightness(1.05);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(12, 74, 110, .18);
+    }
+
+    /* Sidebar: buğulu cam efekti */
+    .sidebar {
+      background: color-mix(in srgb, var(--card) 82%, transparent);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-right: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+      box-shadow: 1px 0 20px rgba(15, 23, 42, .04);
+    }
+
+    /* Sidebar aktif buton: ince geçiş + glow */
+    .side-btn {
+      transition: all .22s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .side-btn.aktif {
+      letter-spacing: .2px;
+    }
+
+    /* Tabloları saran kartlar için yumuşak kenar */
+    table {
+      border-radius: 12px;
+      overflow: clip;
+    }
+
+    /* İnce, şık scrollbar */
+    ::-webkit-scrollbar {
+      width: 9px;
+      height: 9px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: color-mix(in srgb, var(--muted) 40%, transparent);
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: color-mix(in srgb, var(--primary-light) 60%, transparent);
+      background-clip: padding-box;
+      border: 2px solid transparent;
+    }
+
+    /* Form alanlarına odak halkası */
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, .15);
+    }
+
+    /* Koyu temada kart gölgelerini yumuşat */
+    :root[data-theme="dark"] .kart {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    }
+
+    :root[data-theme="dark"] .kart:hover {
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .5);
+    }
+
+    :root[data-theme="dark"] .sidebar {
+      box-shadow: 1px 0 20px rgba(0, 0, 0, .3);
+    }
+
+    /* Yazdırma ve animasyonlarda görsel değişiklikleri devre dışı bırak */
+    @media print {
+      .kart, .btn {
+        box-shadow: none !important;
+        transform: none !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .kart, .btn, .side-btn, .tb1-avatar {
+        transition: none !important;
+      }
+    }
 </style>
 
 </head>
 
 <body ondragover="event.preventDefault();" ondrop="event.preventDefault();">
+<!-- ═══════ SVG İKON KÜTÜPHANESİ (Lucide stil) ═══════ -->
+<svg id="ikonKitapligi" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 12-5-5-4 3-4-4"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+  <symbol id="i-archive" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M10 13h4"/></symbol>
+  <symbol id="i-money" viewBox="0 0 24 24"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></symbol>
+  <symbol id="i-banknote" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+  <symbol id="i-alarm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.857 1.5-2.729 3-3 3zm0 0h6"/><path d="m2 16 3-8 3 8c-.857 1.5-2.729 3-3 3zm0 0h6"/><path d="M8 21h8"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></symbol>
+  <symbol id="i-ship" viewBox="0 0 24 24"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V3.857a1 1 0 0 0-.76-.97 19.9 19.9 0 0 0-6.48 0 1 1 0 0 0-.76.97V13"/><path d="M10 5.4v6.2"/><path d="M14 5.4v6.2"/></symbol>
+  <symbol id="i-guide" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="8" x2="8" y1="14" y2="14"/><line x1="12" x2="12" y1="14" y2="14"/><line x1="16" x2="16" y1="14" y2="18"/><line x1="8" x2="8" y1="18" y2="18"/><line x1="12" x2="12" y1="18" y2="18"/></symbol>
+  <symbol id="i-tools" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-crown" viewBox="0 0 24 24"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.018 6.02a.5.5 0 0 1 .798-.52l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+</svg>
+
     <!-- GİRİŞ EKRANI -->
   <div id="girisEkrani" style="position:fixed;inset:0;background:linear-gradient(135deg,#0c4a6e,#082f49);z-index:999999;display:none;align-items:center;justify-content:center;padding:20px;">
     <div style="background:#fff;border-radius:20px;padding:40px;max-width:400px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.5);text-align:center;">
@@ -6804,58 +7057,52 @@ tr.satir-secili td {
   </div>
   <div class="tb1-aksiyonlar">
 <button class="tb1-btn tb1-btn-yazili" onclick="yedekAlHTML()" title="HTML Dosyasına Yedek Al" id="dosyaKaydetBtn" style="background:linear-gradient(135deg,#16a34a,#15803d);border-color:rgba(22,163,74,.5);color:#fff;">
-  <span style="font-size:15px;">📥</span><span>Yedek Al</span>
+  <svg class="ic" style="width:15px;height:15px;"><use href="#i-download"/></svg><span>Yedek Al</span>
 </button>    
     <button class="tb1-btn" onclick="acAnimsaticiModal()" id="animsaticiBtn" title="Anımsatıcılar">
-      <span style="font-size:18px;">🔔</span>
+      <svg class="ic"><use href="#i-bell"/></svg>
     </button>
         <button class="tb1-btn" onclick="kilitToggle()" id="kilitBtn" title="Uygulamayı Kilitle">
-      <span style="font-size:18px;" id="kilitIkon">🔓</span>
+      <span id="kilitIkon" style="display:flex;"><svg class="ic"><use href="#i-unlock"/></svg></span>
     </button>
     <button class="tb1-btn" onclick="acHesapMakinesi()" title="Hesap Makinesi">
-  <svg width="20" height="20" viewBox="0 0 100 100" style="display:block;">
-    <rect x="2" y="2" width="47" height="47" rx="10" fill="#ff9500"/>
-    <rect x="51" y="2" width="47" height="47" rx="10" fill="#ff9500"/>
-    <rect x="2" y="51" width="47" height="47" rx="10" fill="#ff9500"/>
-    <rect x="51" y="51" width="47" height="47" rx="10" fill="#d4d4d2"/>
-    <text x="25" y="34" text-anchor="middle" font-family="Arial" font-size="34" font-weight="900" fill="#fff">+</text>
-    <text x="75" y="34" text-anchor="middle" font-family="Arial" font-size="34" font-weight="900" fill="#fff">−</text>
-    <text x="25" y="83" text-anchor="middle" font-family="Arial" font-size="34" font-weight="900" fill="#fff">×</text>
-    <text x="75" y="83" text-anchor="middle" font-family="Arial" font-size="34" font-weight="900" fill="#666">=</text>
-  </svg>
+  <svg class="ic"><use href="#i-calc"/></svg>
 </button>
 <!-- 📝 NOTLAR BUTONU — RENKLİ VERSİYON -->
 <!-- 📝 NOTLAR BUTONU — EMOJI VERSİYON -->
-<button class="tb1-btn notlar-btn" onclick="notlarModalAc()" title="📝 Notlarım" id="notlarBtn" style="font-size:20px;">📝</button>
+<button class="tb1-btn notlar-btn" onclick="notlarModalAc()" title="📝 Notlarım" id="notlarBtn"><svg class="ic"><use href="#i-note"/></svg></button>
     <button class="tb1-btn" onclick="araclarMenuAc(event)" title="Araçlar">
-      <span style="font-size:18px;">🛠️</span>
+      <svg class="ic"><use href="#i-tools"/></svg>
     </button>
   </div>
   <div class="tb1-kullanici" id="kullaniciMenusu" style="position:relative;margin-left:8px;">
     <button class="tb1-btn" onclick="kullaniciMenuAc()" title="Hesabım" 
       style="width:auto;padding:0 12px;display:flex;align-items:center;gap:8px;">
-      <span id="kullaniciRolIkonu" style="font-size:18px;">👤</span>
+      <span id="kullaniciAvatar" class="tb1-avatar">👤</span>
       <span id="kullaniciEmailKisa" style="font-size:12px;font-weight:700;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Kullanıcı</span>
       <span style="font-size:10px;opacity:.7;">▼</span>
     </button>
     
     <!-- Kullanıcı Dropdown -->
     <div id="kullaniciDropdown" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.15);min-width:240px;z-index:9999;overflow:hidden;">
-      <div style="padding:14px 16px;background:linear-gradient(135deg,#0c4a6e,#082f49);color:#fff;">
-        <div style="font-size:11px;opacity:.7;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Giriş Yapan</div>
-        <div id="kullaniciEmailTam" style="font-size:13px;font-weight:800;margin-top:4px;word-break:break-all;">-</div>
+      <div style="padding:16px;background:linear-gradient(135deg,#0c4a6e,#082f49);color:#fff;display:flex;align-items:center;gap:12px;">
+        <span class="tb1-avatar" style="width:38px;height:38px;font-size:14px;box-shadow:0 0 0 2px rgba(255,255,255,.25);">👤</span>
+        <span style="min-width:0;">
+          <span style="display:block;font-size:10px;opacity:.7;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Giriş Yapan</span>
+          <span id="kullaniciEmailTam" style="display:block;font-size:13px;font-weight:800;margin-top:2px;word-break:break-all;">-</span>
+        </span>
       </div>
-      <button onclick="profilAc()" class="kullanici-menu-btn">👤 Profilim</button>
-      <button onclick="yoneticiPaneliniAc()" class="kullanici-menu-btn" id="yoneticiPanelBtn" style="display:none;">👑 Yönetici Paneli</button>
-      <button onclick="sifreDegistirAc()" class="kullanici-menu-btn">🔒 Şifre Değiştir</button>
-      <button onclick="kullaniciMenusuKapat();temaDegistir()" class="kullanici-menu-btn">🌙 Tema Değiştir</button>
-      <button onclick="kullaniciMenusuKapat();acAyarlarModal()" class="kullanici-menu-btn">⚙️ Ayarlar</button>
+      <button onclick="profilAc()" class="kullanici-menu-btn"><svg class="ic kmb-i"><use href="#i-user"/></svg> Profilim</button>
+      <button onclick="yoneticiPaneliniAc()" class="kullanici-menu-btn" id="yoneticiPanelBtn" style="display:none;"><svg class="ic kmb-i" style="color:#f59e0b;"><use href="#i-crown"/></svg> Yönetici Paneli</button>
+      <button onclick="sifreDegistirAc()" class="kullanici-menu-btn"><svg class="ic kmb-i"><use href="#i-lock"/></svg> Şifre Değiştir</button>
+      <button onclick="kullaniciMenusuKapat();temaDegistir()" class="kullanici-menu-btn"><svg class="ic kmb-i tema-ikon-dark" style="display:none;"><use href="#i-sun"/></svg><svg class="ic kmb-i tema-ikon-light"><use href="#i-moon"/></svg> <span id="temaMenuYazi">Tema Değiştir</span></button>
+      <button onclick="kullaniciMenusuKapat();acAyarlarModal()" class="kullanici-menu-btn"><svg class="ic kmb-i"><use href="#i-settings"/></svg> Ayarlar</button>
       <div style="height:1px;background:#e2e8f0;margin:4px 0;"></div>
-      <button onclick="cikisYap()" class="kullanici-menu-btn" style="color:#dc2626;">🚪 Çıkış Yap</button>
+      <button onclick="cikisYap()" class="kullanici-menu-btn" style="color:#dc2626;"><svg class="ic kmb-i" style="color:#dc2626;"><use href="#i-logout"/></svg> Çıkış Yap</button>
     </div>
   </div>
     <button class="tb1-btn tb1-hava" onclick="havaDurumuAc()" id="havaBtn" title="Hava Durumu" style="width:auto;padding:0 14px;display:flex;align-items:center;gap:6px;min-width:78px;justify-content:center;">
-    <span id="havaIkon" style="font-size:20px;line-height:1;">🌤️</span>
+    <span id="havaIkon" style="display:flex;"><svg class="ic" style="width:20px;height:20px;"><use href="#i-cloud"/></svg></span>
     <span id="havaSicaklik" style="font-size:14px;font-weight:900;letter-spacing:-0.5px;white-space:nowrap;">--°</span>
   </button>
   <div class="tb1-saat">
@@ -6871,64 +7118,64 @@ tr.satir-secili td {
   <!-- 🏠 GENEL -->
   <div class="side-grup-baslik">Genel</div>
   <button class="side-btn aktif" data-sayfa="anasayfa" onclick="sayfaDegistir('anasayfa')">
-    <span class="side-ikon">🏠</span><span class="side-yazi">Anasayfa</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-home"/></svg></span><span class="side-yazi">Anasayfa</span>
   </button>
   <button class="side-btn" data-sayfa="raporlar" onclick="sayfaDegistir('raporlar')">
-    <span class="side-ikon">📈</span><span class="side-yazi">Raporlar</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-chart"/></svg></span><span class="side-yazi">Raporlar</span>
   </button>
   <button class="side-btn" data-sayfa="donemler" onclick="sayfaDegistir('donemler')">
-    <span class="side-ikon">📅</span><span class="side-yazi">Dönemler</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-calendar"/></svg></span><span class="side-yazi">Dönemler</span>
   </button>
   <button class="side-btn" onclick="notlarModalAc()">
-    <span class="side-ikon">📝</span><span class="side-yazi">Notlar</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-note"/></svg></span><span class="side-yazi">Notlar</span>
   </button>
 
   <!-- 📊 PERSONEL İŞLERİ -->
   <div class="side-grup-baslik">Personel İşleri</div>
   <button class="side-btn" data-sayfa="puantaj" onclick="sayfaDegistir('puantaj')">
-    <span class="side-ikon">📊</span><span class="side-yazi">Puantaj</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-table"/></svg></span><span class="side-yazi">Puantaj</span>
   </button>
   <button class="side-btn" data-sayfa="mesai" onclick="sayfaDegistir('mesai')">
-    <span class="side-ikon">⏱️</span><span class="side-yazi">Mesai</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-clock"/></svg></span><span class="side-yazi">Mesai</span>
   </button>
   <button class="side-btn" data-sayfa="egitim" onclick="sayfaDegistir('egitim')">
-    <span class="side-ikon">📚</span><span class="side-yazi">Eğitim</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-book"/></svg></span><span class="side-yazi">Eğitim</span>
   </button>
     <button class="side-btn" data-sayfa="lumbar" onclick="sayfaDegistir('lumbar')">
-    <span class="side-ikon">🗂️</span><span class="side-yazi">Lumbar Arşivi</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-archive"/></svg></span><span class="side-yazi">Lumbar Arşivi</span>
   </button>
 
   <!-- 💰 FİNANS -->
   <div class="side-grup-baslik">Finans</div>
   <button class="side-btn" data-sayfa="avans" onclick="sayfaDegistir('avans')">
-    <span class="side-ikon">💸</span><span class="side-yazi">Avans</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-money"/></svg></span><span class="side-yazi">Avans</span>
   </button>
   <button class="side-btn" data-sayfa="ikinciOdeme" onclick="sayfaDegistir('ikinciOdeme')">
-    <span class="side-ikon">💵</span><span class="side-yazi">İkinci Ödeme</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-banknote"/></svg></span><span class="side-yazi">İkinci Ödeme</span>
   </button>
   <button class="side-btn" data-sayfa="muhasebe" onclick="sayfaDegistir('muhasebe')">
-    <span class="side-ikon">📤</span><span class="side-yazi">Muhasebe</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-send"/></svg></span><span class="side-yazi">Muhasebe</span>
   </button>
   <button class="side-btn" data-sayfa="kesinti" onclick="sayfaDegistir('kesinti')">
-    <span class="side-ikon">⏰</span><span class="side-yazi">Saat Kesintisi</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-alarm"/></svg></span><span class="side-yazi">Saat Kesintisi</span>
   </button>
   <button class="side-btn" data-sayfa="ekstra" onclick="sayfaDegistir('ekstra')">
-    <span class="side-ikon">💼</span><span class="side-yazi">Ekstra Kesinti</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-briefcase"/></svg></span><span class="side-yazi">Ekstra Kesinti</span>
   </button>
   <button class="side-btn" data-sayfa="icra" onclick="sayfaDegistir('icra')">
-    <span class="side-ikon">⚖️</span><span class="side-yazi">İcra Takip</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-scale"/></svg></span><span class="side-yazi">İcra Takip</span>
   </button>
 
   <!-- 🚢 OPERASYON -->
   <div class="side-grup-baslik">Operasyon</div>
   <button class="side-btn" data-sayfa="gemi" onclick="sayfaDegistir('gemi')">
-    <span class="side-ikon">🚢</span><span class="side-yazi">Gemi Takip</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-ship"/></svg></span><span class="side-yazi">Gemi Takip</span>
   </button>
 
   <!-- 🛠️ SİSTEM -->
   <div class="side-grup-baslik">Sistem</div>
   <button class="side-btn" onclick="acRehber()">
-    <span class="side-ikon">📖</span><span class="side-yazi">Rehber</span>
+    <span class="side-ikon"><svg class="ic"><use href="#i-guide"/></svg></span><span class="side-yazi">Rehber</span>
   </button>
 
   <div class="side-bosluk"></div>
@@ -6937,14 +7184,14 @@ tr.satir-secili td {
     <main class="main">
       <div class="page aktif" id="page-anasayfa">
         <div class="header">
-          <h2 class="title">👥 Personeller <span class="badge" id="personelSayisi">0</span></h2>
+          <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-users"/></svg> Personeller <span class="badge" id="personelSayisi">0</span></h2>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="btn ikincil" onclick="tumunuMaasliYap()" title="Tüm personeli maaşlı yap">💰 Tümünü Maaşlı</button>
-            <button class="btn ikincil" onclick="tumunuYevmiyeliYap()" title="Tüm personeli yevmiyeli yap">📅 Tümünü Yevmiyeli</button>
-            <button class="btn ikincil" onclick="tumPersoneliSil()" title="Tüm personeli sil" style="color:#dc2626;border-color:rgba(220,38,38,.3);">🗑️ Tümünü Sil</button>
-            <button class="btn" onclick="acPersonelModal()">➕ Yeni Personel</button>
-            <button class="btn ikincil" onclick="excelAktarPersonel()">📊 Excel</button>
-            <button class="btn ikincil print-btn" onclick="sayfaYazdir('Personel Listesi')">🖨️ Yazdır</button>
+            <button class="btn ikincil" onclick="tumunuMaasliYap()" title="Tüm personeli maaşlı yap"><svg class="ic btn-i"><use href="#i-banknote"/></svg> Tümünü Maaşlı</button>
+            <button class="btn ikincil" onclick="tumunuYevmiyeliYap()" title="Tüm personeli yevmiyeli yap"><svg class="ic btn-i"><use href="#i-calendar"/></svg> Tümünü Yevmiyeli</button>
+            <button class="btn ikincil" onclick="tumPersoneliSil()" title="Tüm personeli sil" style="color:#dc2626;border-color:rgba(220,38,38,.3);"><svg class="ic btn-i" style="color:#dc2626;"><use href="#i-trash"/></svg> Tümünü Sil</button>
+            <button class="btn" onclick="acPersonelModal()"><svg class="ic btn-i"><use href="#i-plus"/></svg> Yeni Personel</button>
+            <button class="btn ikincil" onclick="excelAktarPersonel()"><svg class="ic btn-i"><use href="#i-file"/></svg> Excel</button>
+            <button class="btn ikincil print-btn" onclick="sayfaYazdir('Personel Listesi')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
           </div>
         </div>
         <div class="search"><input type="text" id="aramaKutu" placeholder="🔍 Ad, sicil veya meslek ara..." oninput="renderPersoneller()"></div>
@@ -6952,7 +7199,7 @@ tr.satir-secili td {
       </div>
       <div class="page" id="page-puantaj">
         <div class="header">
-          <h2 class="title">📊 Yevmiye Puantajı</h2>
+          <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-table"/></svg> Yevmiye Puantajı</h2>
         </div>
         <!-- 📊 DÜNÜN ÖZETİ -->
 <div id="dunOzetiBar" style="background:linear-gradient(135deg,rgba(2,132,199,.08),rgba(56,189,248,.04));border:1px solid rgba(2,132,199,.25);border-radius:14px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
@@ -6992,14 +7239,14 @@ tr.satir-secili td {
                   <div style="width:100%; margin-bottom:10px; position:relative;">
           <input type="text" id="puantajArama" placeholder="🔍 İsim veya Sicil ara..." oninput="renderPuantaj()" style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-family:inherit; font-size:13px;">
         </div>
-          <button class="pbtn" onclick="acYuklemeModal()">📥 Liste Yükle</button>
-          <button class="pbtn" onclick="acSaatYukleModal()" style="background:linear-gradient(135deg,#f59e0b,#d97706);">⏰ Saatlerden Yükle</button>
-          <button class="pbtn ikincil" onclick="excelAktar()">📊 Excel'e Aktar</button>
-          <button class="btn ikincil print-btn" onclick="sayfaYazdir('Puantaj')">🖨️ Yazdır</button>
-          <button class="pbtn ikincil" id="meslekToggle" onclick="toggleMeslek()">👁️ Mesleği Gizle</button>
+          <button class="pbtn" onclick="acYuklemeModal()"><svg class="ic btn-i"><use href="#i-download"/></svg> Liste Yükle</button>
+          <button class="pbtn" onclick="acSaatYukleModal()" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><svg class="ic btn-i"><use href="#i-clock"/></svg> Saatlerden Yükle</button>
+          <button class="pbtn ikincil" onclick="excelAktar()"><svg class="ic btn-i"><use href="#i-download"/></svg> Excel'e Aktar</button>
+          <button class="btn ikincil print-btn" onclick="sayfaYazdir('Puantaj')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
+          <button class="pbtn ikincil" id="meslekToggle" onclick="toggleMeslek()"><svg class="ic btn-i"><use href="#i-eye"/></svg> Mesleği Gizle</button>
           <button class="pbtn ikincil" id="pazarToggle" onclick="togglePazar()">🟨 Pazar Rengi</button>
           <div class="pbtn-spacer"></div>
-          <button class="pbtn ikincil" onclick="puantajTemizle()">🗑️ Tabloyu Boşalt</button>
+          <button class="pbtn ikincil" onclick="puantajTemizle()"><svg class="ic btn-i"><use href="#i-trash"/></svg> Tabloyu Boşalt</button>
           <button class="pbtn" onclick="bosGunleriXYap()" style="background:linear-gradient(135deg,#dc2626,#991b1b);">❌ Boş Günleri X Yap</button>
                     <button class="pbtn" onclick="puantajKaydetButon()" style="background:linear-gradient(135deg,#16a34a,#15803d);font-size:14px;padding:11px 20px;font-weight:900;">💾 KAYDET</button>
         </div>
@@ -7015,9 +7262,9 @@ tr.satir-secili td {
       </div>
       <div class="page" id="page-avans">
 <div class="header">
-  <h2 class="title">💸 Avans Yönetimi</h2>
-  <button class="btn ikincil" onclick="avansExcel()">📊 Excel'e Aktar</button>
-  <button class="btn ikincil print-btn" onclick="sayfaYazdir('Avans')">🖨️ Yazdır</button>
+  <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-money"/></svg> Avans Yönetimi</h2>
+  <button class="btn ikincil" onclick="avansExcel()"><svg class="ic btn-i"><use href="#i-download"/></svg> Excel'e Aktar</button>
+  <button class="btn ikincil print-btn" onclick="sayfaYazdir('Avans')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
 </div>
       <!-- 💡 NASIL KULLANILIR — YENİ -->
       <div class="puantaj-info">
@@ -7065,7 +7312,7 @@ tr.satir-secili td {
             </div>
           </div>
           <div class="avans-form-alt">
-            <button class="btn" onclick="avansEkle()">➕ Avans Ekle</button>
+            <button class="btn" onclick="avansEkle()"><svg class="ic btn-i"><use href="#i-plus"/></svg> Avans Ekle</button>
             <button class="btn ikincil" onclick="avansFormTemizle()">Temizle</button>
           </div>
         </div>
@@ -7096,7 +7343,7 @@ tr.satir-secili td {
       </div>
       <div class="page" id="page-mesai">
         <div class="header">
-          <h2 class="title">⏱️ Fazla Mesai Takibi</h2>
+          <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-clock"/></svg> Fazla Mesai Takibi</h2>
         </div>
 
         <div class="puantaj-info">
@@ -7124,12 +7371,12 @@ tr.satir-secili td {
             <input type="date" id="mesaiTarih"
               style="padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:inherit;font-size:13px;font-weight:700;">
           </div>
-          <button class="pbtn" onclick="acMesaiYukleModal()">📥 Excel'den Yükle</button>
+          <button class="pbtn" onclick="acMesaiYukleModal()"><svg class="ic btn-i"><use href="#i-download"/></svg> Excel'den Yükle</button>
           <button class="pbtn ikincil" onclick="acResmiTatilModal()">🗓️ Resmi Tatiller</button>
-          <button class="pbtn ikincil" onclick="mesaiExcelAktar()">📊 Excel'e Aktar</button>
-          <button class="btn ikincil print-btn" onclick="sayfaYazdir('Mesai')">🖨️ Yazdır</button>
+          <button class="pbtn ikincil" onclick="mesaiExcelAktar()"><svg class="ic btn-i"><use href="#i-download"/></svg> Excel'e Aktar</button>
+          <button class="btn ikincil print-btn" onclick="sayfaYazdir('Mesai')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
           <div class="pbtn-spacer"></div>
-          <button class="pbtn ikincil" onclick="mesaiTemizle()">🗑️ Mesaiyi Boşalt</button>
+          <button class="pbtn ikincil" onclick="mesaiTemizle()"><svg class="ic btn-i"><use href="#i-trash"/></svg> Mesaiyi Boşalt</button>
         </div>
 
         <div class="tablo-wrap">
@@ -7144,10 +7391,10 @@ tr.satir-secili td {
       </div>
       <div class="page" id="page-muhasebe">
         <div class="header">
-          <h2 class="title">📤 Muhasebe Tablosu</h2>
-          <button class="btn" onclick="muhasebeExcelAktar()">📊 Excel'e Aktar</button>
-          <button class="btn ikincil print-btn" onclick="sayfaYazdir('Muhasebe')">🖨️ Yazdır</button>
-          <button class="btn ikincil" onclick="tumTabloyuKopyala('muhasebeTablo')">📋 Tabloyu Kopyala</button>
+          <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-send"/></svg> Muhasebe Tablosu</h2>
+          <button class="btn" onclick="muhasebeExcelAktar()"><svg class="ic btn-i"><use href="#i-download"/></svg> Excel'e Aktar</button>
+          <button class="btn ikincil print-btn" onclick="sayfaYazdir('Muhasebe')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
+          <button class="btn ikincil" onclick="tumTabloyuKopyala('muhasebeTablo')"><svg class="ic btn-i"><use href="#i-file"/></svg> Tabloyu Kopyala</button>
         </div>
                 <div class="puantaj-info">
           <b>💡 Nasıl Kullanılır?</b><br>
@@ -7182,7 +7429,7 @@ tr.satir-secili td {
   <!-- 🗂️ LUMBAR ARŞİVİ SAYFASI (BAŞLANGIÇ) -->
   <div class="page" id="page-lumbar">
     <div class="header">
-      <h2 class="title">🗂️ Lumbar Arşivi <span class="badge" id="lumbarSayisi">0</span></h2>
+      <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-archive"/></svg> Lumbar Arşivi <span class="badge" id="lumbarSayisi">0</span></h2>
     </div>
     
     <div class="puantaj-info" style="margin-bottom:14px;">
@@ -7220,12 +7467,12 @@ tr.satir-secili td {
     
       <div class="page" id="page-egitim">
         <div class="header">
-          <h2 class="title">📚 Modül Eğitim Listesi</h2>
-          <button class="btn" onclick="acEgitimYukleModal()">📥 Haftalık Excel Yükle</button>
-          <button class="btn ikincil print-btn" onclick="sayfaYazdir('Eğitim')">🖨️ Yazdır</button>
+          <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-book"/></svg> Modül Eğitim Listesi</h2>
+          <button class="btn" onclick="acEgitimYukleModal()"><svg class="ic btn-i"><use href="#i-download"/></svg> Haftalık Excel Yükle</button>
+          <button class="btn ikincil print-btn" onclick="sayfaYazdir('Eğitim')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
           <button class="btn ikincil" onclick="acEgitimGecmisModal()" id="egitimGecmisBtn" style="display:none;">📚
             Geçmiş</button>
-          <button class="btn ikincil" onclick="egitimPdfIndir()" id="egitimPdfBtn" style="display:none;">📄 PDF
+          <button class="btn ikincil" onclick="egitimPdfIndir()" id="egitimPdfBtn" style="display:none;"><svg class="ic btn-i"><use href="#i-file"/></svg> PDF
             İndir</button>
         </div>
                 <div class="puantaj-info" id="egitimBilgi">
@@ -7245,7 +7492,7 @@ tr.satir-secili td {
       </div>
       <div class="page" id="page-kesinti">
         <div class="header">
-          <h2 class="title">⏰ Geç Giriş / Erken Çıkış Kesintisi</h2>
+          <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-alarm"/></svg> Geç Giriş / Erken Çıkış Kesintisi</h2>
         </div>
 
         <div class="kesinti-layout">
@@ -7326,7 +7573,7 @@ tr.satir-secili td {
               </div>
               <div id="kOnizleme" class="kesinti-onizleme" style="display:none;"></div>
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <button class="btn" onclick="kesintiEkle()">➕ Kaydet</button>
+                <button class="btn" onclick="kesintiEkle()"><svg class="ic btn-i"><use href="#i-plus"/></svg> Kaydet</button>
                 <button class="btn ikincil" onclick="kesintiFormTemizle()">Temizle</button>
               </div>
             </div>
@@ -7341,8 +7588,8 @@ tr.satir-secili td {
               </div>
               <div
                 style="padding:10px 20px;background:var(--card);border-bottom:1px solid var(--border);display:flex;justify-content:flex-end;">
-                <button class="pbtn" onclick="kesintiExcelAktar()">📊 Excel'e Aktar</button>
-                <button class="btn ikincil print-btn" onclick="sayfaYazdir('Kesinti')">🖨️ Yazdır</button>
+                <button class="pbtn" onclick="kesintiExcelAktar()"><svg class="ic btn-i"><use href="#i-download"/></svg> Excel'e Aktar</button>
+                <button class="btn ikincil print-btn" onclick="sayfaYazdir('Kesinti')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
               </div>
               <div class="kesinti-filtre">
                 <div class="kontrol-group">
@@ -7388,9 +7635,9 @@ tr.satir-secili td {
 <!-- ═══ EKSTRA KESİNTİ SAYFASI ═══ -->
 <div class="page" id="page-ekstra">
   <div class="header">
-    <h2 class="title">💼 Ekstra Kesinti</h2>
-    <button class="btn ikincil" onclick="ekstraExcelAktar()">📊 Excel'e Aktar</button>
-    <button class="btn ikincil print-btn" onclick="sayfaYazdir('Ekstra Kesinti')">🖨️ Yazdır</button>
+    <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-briefcase"/></svg> Ekstra Kesinti</h2>
+    <button class="btn ikincil" onclick="ekstraExcelAktar()"><svg class="ic btn-i"><use href="#i-download"/></svg> Excel'e Aktar</button>
+    <button class="btn ikincil print-btn" onclick="sayfaYazdir('Ekstra Kesinti')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
   </div>
 
         <div class="puantaj-info">
@@ -7446,7 +7693,7 @@ tr.satir-secili td {
       </div>
     </div>
     <div class="avans-form-alt">
-      <button class="btn" onclick="ekstraEkle()">➕ Ekle</button>
+      <button class="btn" onclick="ekstraEkle()"><svg class="ic btn-i"><use href="#i-plus"/></svg> Ekle</button>
       <button class="btn ikincil" onclick="ekstraFormTemizle()">Temizle</button>
     </div>
   </div>
@@ -7504,10 +7751,10 @@ tr.satir-secili td {
       <!-- ═══ İCRA TAKİP SAYFASI ═══ -->
       <div class="page" id="page-icra">
         <div class="header">
-          <h2 class="title">⚖️ İcra Takip</h2>
-          <button class="btn" onclick="acIcraEkleModal()">➕ Yeni İcra Ekle</button>
-          <button class="btn ikincil" onclick="icraExcelAktar()">📊 Excel'e Aktar</button>
-          <button class="btn ikincil print-btn" onclick="sayfaYazdir('İcra Takip')">🖨️ Yazdır</button>
+          <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-scale"/></svg> İcra Takip</h2>
+          <button class="btn" onclick="acIcraEkleModal()"><svg class="ic btn-i"><use href="#i-plus"/></svg> Yeni İcra Ekle</button>
+          <button class="btn ikincil" onclick="icraExcelAktar()"><svg class="ic btn-i"><use href="#i-download"/></svg> Excel'e Aktar</button>
+          <button class="btn ikincil print-btn" onclick="sayfaYazdir('İcra Takip')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
         </div>
 
         <div class="puantaj-info">
@@ -7535,8 +7782,8 @@ tr.satir-secili td {
 
       <div class="page" id="page-donemler">
         <div class="header">
-          <h2 class="title">📅 Dönemler</h2>
-          <button class="btn" onclick="acYeniDonemModal()">➕ Yeni Dönem Aç</button>
+          <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-calendar"/></svg> Dönemler</h2>
+          <button class="btn" onclick="acYeniDonemModal()"><svg class="ic btn-i"><use href="#i-plus"/></svg> Yeni Dönem Aç</button>
         </div>
                 <div class="puantaj-info">
           <b>💡 Nasıl Kullanılır?</b><br>
@@ -7557,11 +7804,11 @@ tr.satir-secili td {
 <!-- ═══ GEMİ TAKİP SAYFASI ═══ -->
 <div class="page" id="page-gemi">
 <div class="header">
-  <h2 class="title">🚢 Gemi Takip</h2>
+  <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-ship"/></svg> Gemi Takip</h2>
   <div style="display:flex;gap:8px;flex-wrap:wrap;">
-    <button class="btn ikincil" onclick="gemiYevmiyeExcel()">📊 Yevmiye Excel</button>
-    <button class="btn ikincil print-btn" onclick="sayfaYazdir('Gemi')">🖨️ Yazdır</button>
-    <button class="btn ikincil" onclick="gemiGoturuExcel()">📊 Götürü Excel</button>
+    <button class="btn ikincil" onclick="gemiYevmiyeExcel()"><svg class="ic btn-i"><use href="#i-chart"/></svg> Yevmiye Excel</button>
+    <button class="btn ikincil print-btn" onclick="sayfaYazdir('Gemi')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
+    <button class="btn ikincil" onclick="gemiGoturuExcel()"><svg class="ic btn-i"><use href="#i-chart"/></svg> Götürü Excel</button>
   </div>
 </div>
         <div class="puantaj-info">
@@ -7611,7 +7858,7 @@ tr.satir-secili td {
         </div>
       </div>
       <div class="avans-form-alt">
-        <button class="btn" onclick="gemiYevmiyeEkle()">➕ Ekle</button>
+        <button class="btn" onclick="gemiYevmiyeEkle()"><svg class="ic btn-i"><use href="#i-plus"/></svg> Ekle</button>
         <button class="btn ikincil" onclick="gemiYevmiyeFormTemizle()">Temizle</button>
       </div>
     </div>
@@ -7662,7 +7909,7 @@ tr.satir-secili td {
         </div>
       </div>
       <div class="avans-form-alt">
-        <button class="btn" onclick="gemiGoturuEkle()">➕ Ekle</button>
+        <button class="btn" onclick="gemiGoturuEkle()"><svg class="ic btn-i"><use href="#i-plus"/></svg> Ekle</button>
         <button class="btn ikincil" onclick="gemiGoturuFormTemizle()">Temizle</button>
       </div>
     </div>
@@ -7694,11 +7941,11 @@ tr.satir-secili td {
 <!-- ═══ İKİNCİ ÖDEME SAYFASI ═══ -->
 <div class="page" id="page-ikinciOdeme">
   <div class="header">
-    <h2 class="title">💵 İkinci Ödeme</h2>
+    <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-banknote"/></svg> İkinci Ödeme</h2>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="btn" onclick="acBankaYukleModal()" style="background:linear-gradient(135deg,#f59e0b,#d97706);">📥 Banka Yükle</button>
-      <button class="btn" onclick="ikinciOdemeExcel()">📊 Excel'e Aktar</button>
-      <button class="btn ikincil print-btn" onclick="sayfaYazdir('İkinci Ödeme')">🖨️ Yazdır</button>
+      <button class="btn" onclick="acBankaYukleModal()" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><svg class="ic btn-i"><use href="#i-download"/></svg> Banka Yükle</button>
+      <button class="btn" onclick="ikinciOdemeExcel()"><svg class="ic btn-i"><use href="#i-download"/></svg> Excel'e Aktar</button>
+      <button class="btn ikincil print-btn" onclick="sayfaYazdir('İkinci Ödeme')"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
     </div>
   </div>
           <div class="puantaj-info">
@@ -7805,9 +8052,9 @@ tr.satir-secili td {
 </div>
 <div class="page" id="page-raporlar">
   <div class="header">
-    <h2 class="title">📊 Raporlar <span class="badge" id="raporDonemBadge">-</span></h2>
-    <button class="btn ikincil" onclick="raporYazdir()">🖨️ Yazdır</button>
-    <button class="btn ikincil" onclick="raporExcel()">📊 Excel'e Aktar</button>
+    <h2 class="title"><svg class="ic baslik-ikon"><use href="#i-chart"/></svg> Raporlar <span class="badge" id="raporDonemBadge">-</span></h2>
+    <button class="btn ikincil" onclick="raporYazdir()"><svg class="ic btn-i"><use href="#i-print"/></svg> Yazdır</button>
+    <button class="btn ikincil" onclick="raporExcel()"><svg class="ic btn-i"><use href="#i-download"/></svg> Excel'e Aktar</button>
   </div>
     <!-- AYLIK ÖZET KARTI -->
   <div class="aylik-ozet-kart" id="aylikOzetKart">
@@ -8299,7 +8546,7 @@ tr.satir-secili td {
             id="kurtarmaKodGoster">------</div>
           <div style="display:flex;gap:6px;margin-bottom:10px;">
             <button type="button" class="btn ikincil" onclick="kurtarmaKodKopyala()"
-              style="flex:1;font-size:11px;padding:6px 10px;">📋 Kopyala</button>
+              style="flex:1;font-size:11px;padding:6px 10px;"><svg class="ic btn-i"><use href="#i-file"/></svg> Kopyala</button>
             <button type="button" class="btn ikincil" onclick="kurtarmaKodYenile()"
               style="font-size:11px;padding:6px 10px;">🔄 Yenile</button>
           </div>
@@ -8336,7 +8583,7 @@ tr.satir-secili td {
       </div>
       <div class="modal-foot">
         <button class="btn-iptal" onclick="kapatModal('kurtarmaKodModal')">İptal</button>
-        <button class="btn-kaydet" onclick="kurtarmaKodDene()">🔓 Sıfırla</button>
+        <button class="btn-kaydet" onclick="kurtarmaKodDene()"><svg class="ic btn-i"><use href="#i-unlock"/></svg> Sıfırla</button>
       </div>
     </div>
   </div>
@@ -8362,7 +8609,7 @@ tr.satir-secili td {
         </div>
       </div>
       <div class="modal-foot" style="flex-direction:column;gap:8px;">
-        <button class="btn-kaydet" onclick="parolaGirisDene()" style="width:100%;justify-content:center;">🔓 Giriş
+        <button class="btn-kaydet" onclick="parolaGirisDene()" style="width:100%;justify-content:center;"><svg class="ic btn-i"><use href="#i-unlock"/></svg> Giriş
           Yap</button>
         <div style="display:flex;gap:6px;width:100%;">
           <button class="btn-iptal" onclick="parolaKurtarmaKoduAc()" style="flex:1;font-size:11px;padding:8px 10px;">🔑
@@ -8464,7 +8711,7 @@ tr.satir-secili td {
             class="btn-kaydet" 
             onclick="notEkle()" 
             style="padding:10px 20px;"
-          >➕ Notu Ekle</button>
+          ><svg class="ic btn-i"><use href="#i-plus"/></svg> Notu Ekle</button>
         </div>
       </div>
 
@@ -8548,7 +8795,7 @@ tr.satir-secili td {
           </div>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
             <button type="button" class="btn ikincil" onclick="acParolaBelirleModal()" id="parolaBelirleBtn"
-              style="font-size:12px;padding:8px 14px;">🔒 Parola Belirle</button>
+              style="font-size:12px;padding:8px 14px;"><svg class="ic btn-i"><use href="#i-lock"/></svg> Parola Belirle</button>
             <button type="button" class="btn ikincil" onclick="parolaKaldir()" id="parolaKaldirBtn"
               style="font-size:12px;padding:8px 14px;color:#dc2626;border-color:rgba(220,38,38,.3);display:none;">🔓
               Parolayı Kaldır</button>
@@ -8775,7 +9022,7 @@ tr.satir-secili td {
         <div style="font-size:13px;font-weight:800;color:#10b981;margin-bottom:6px;">📂 Excel Dosyası Seç</div>
         <div style="font-size:11.5px;color:var(--muted);margin-bottom:10px;">veya aşağıya yapıştır</div>
         <input type="file" id="mesaiExcelDosya" accept=".xlsx,.xls,.csv" onchange="mesaiExcelOku(event)" style="display:none;">
-        <button type="button" onclick="document.getElementById('mesaiExcelDosya').click()" style="padding:10px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(16,185,129,.3);">📁 Dosya Seç</button>
+        <button type="button" onclick="document.getElementById('mesaiExcelDosya').click()" style="padding:10px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(16,185,129,.3);"><svg class="ic btn-i"><use href="#i-archive"/></svg> Dosya Seç</button>
         <div id="mesaiExcelDurum" style="font-size:11.5px;color:var(--muted);margin-top:8px;font-weight:600;"></div>
       </div>
         <textarea id="mesaiYapistir"
@@ -8807,7 +9054,7 @@ tr.satir-secili td {
             <div class="form-group"><label>Açıklama</label><input type="text" id="resmiTatilYeniAd"
                 placeholder="Örn: İdari Tatil"></div>
           </div>
-          <button class="btn" onclick="resmiTatilEkle()" style="margin-top:8px;">➕ Ekle</button>
+          <button class="btn" onclick="resmiTatilEkle()" style="margin-top:8px;"><svg class="ic btn-i"><use href="#i-plus"/></svg> Ekle</button>
         </div>
       </div>
       <div class="modal-foot"><button class="btn-kaydet" onclick="kapatModal('resmiTatilModal')">Tamam</button></div>
@@ -8884,7 +9131,7 @@ tr.satir-secili td {
         <div style="font-size:13px;font-weight:800;color:#10b981;margin-bottom:6px;">📂 Excel Dosyası Seç</div>
         <div style="font-size:11.5px;color:var(--muted);margin-bottom:10px;">veya aşağıya yapıştır</div>
         <input type="file" id="saatExcelDosya" accept=".xlsx,.xls,.csv" onchange="saatExcelOku(event)" style="display:none;">
-        <button type="button" onclick="document.getElementById('saatExcelDosya').click()" style="padding:10px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(16,185,129,.3);">📁 Dosya Seç</button>
+        <button type="button" onclick="document.getElementById('saatExcelDosya').click()" style="padding:10px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(16,185,129,.3);"><svg class="ic btn-i"><use href="#i-archive"/></svg> Dosya Seç</button>
         <div id="saatExcelDurum" style="font-size:11.5px;color:var(--muted);margin-top:8px;font-weight:600;"></div>
       </div>
 
@@ -8918,7 +9165,7 @@ tr.satir-secili td {
       </div>
       <div class="modal-foot">
         <button class="btn-iptal" onclick="notSil()"
-          style="margin-right:auto;color:var(--danger);border-color:rgba(220,38,38,.3);">🗑️ Notu Sil</button>
+          style="margin-right:auto;color:var(--danger);border-color:rgba(220,38,38,.3);"><svg class="ic btn-i"><use href="#i-trash"/></svg> Notu Sil</button>
         <button class="btn-iptal" onclick="kapatModal('notModal')">İptal</button>
         <button class="btn-kaydet" onclick="notKaydet()">💾 Kaydet</button>
       </div>
@@ -9515,13 +9762,20 @@ document.addEventListener('click', (e) => {
         // sessizce geç
       }
             // Yönetici kontrolü - taç göster
-      const rolIkonu = document.getElementById('kullaniciRolIkonu');
+      const rolIkonu = document.getElementById('kullaniciAvatar');
       if (rolIkonu && YONETICI_EPOSTALAR.includes(user.email)) {
-        rolIkonu.innerText = '👑';
+        rolIkonu.classList.add('admin');
+        rolIkonu.innerHTML = '<svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="M12 2l2.4 4.8L20 8l-4 4 1 6-5-2.6L7 18l1-6-4-4 5.6-1.2z"/></svg>';
                 // Yönetici paneli butonunu göster
         const yonBtn = document.getElementById('yoneticiPanelBtn');
         if (yonBtn) yonBtn.style.display = 'flex';
-        rolIkonu.style.color = '#f59e0b';
+      } else if (rolIkonu) {
+        // avatar baş harfleri: isim varsa ondan, yoksa e-postadan
+        const ad = emailKisa ? emailKisa.innerText : kisa;
+        if (ad && ad !== 'Kullanıcı' && !YONETICI_EPOSTALAR.includes(user.email)) {
+          const ilkHarfler = ad.trim().split(/\s+/).map(x => x[0]).slice(0, 2).join('').toUpperCase();
+          if (/^[A-ZÇĞİÖŞÜ0-9]{1,2}$/.test(ilkHarfler)) rolIkonu.innerText = ilkHarfler;
+        }
       }
     }
         /* ========== FIREBASE GİRİŞ/ÇIKIŞ ========== */
@@ -10496,7 +10750,13 @@ function egitimKaydet() {
       }
       function temaYukle() { const t = localStorage.getItem(K_TEMA) || 'light'; if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); guncelleTemaButon(); }
       function temaDegistir() { const c = localStorage.getItem(K_TEMA) || 'light'; const y = c === 'dark' ? 'light' : 'dark'; if (y === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); else document.documentElement.removeAttribute('data-theme'); localStorage.setItem(K_TEMA, y); guncelleTemaButon(); }
-      function guncelleTemaButon() {/* SVG ikonları CSS ile yönetiliyor */ }
+      function guncelleTemaButon() {
+        const koyu = document.documentElement.getAttribute('data-theme') === 'dark';
+        document.querySelectorAll('.tema-ikon-dark').forEach(el => el.style.display = koyu ? 'block' : 'none');
+        document.querySelectorAll('.tema-ikon-light').forEach(el => el.style.display = koyu ? 'none' : 'block');
+        const ty = document.getElementById('temaMenuYazi');
+        if (ty) ty.innerText = koyu ? 'Açık Tema' : 'Koyu Tema';
+      }
 
       function splashGoster() { const s = document.getElementById('splash'); if (!s) return; setTimeout(() => { s.classList.add('gizli'); setTimeout(() => { if (s.parentNode) s.parentNode.removeChild(s); }, 800); }, 2400); }
 
@@ -10893,7 +11153,7 @@ function renderLumbar() {
     // TÜM BUTONLAR HER ZAMAN GÖRÜNÜR
     let btnEkle = zatenAktif 
       ? '<span style="color:#16a34a;font-weight:800;font-size:11px;display:inline-block;padding:4px 8px;">✅ Aktif</span>' 
-      : '<button class="pbtn" style="padding:5px 8px;font-size:11px;margin-right:2px;" onclick="lumbardanAktifeAl(' + p.id + ')">➕ Ekle</button>';
+      : '<button class="pbtn" style="padding:5px 8px;font-size:11px;margin-right:2px;" onclick="lumbardanAktifeAl(' + p.id + ')"><svg class="ic btn-i"><use href="#i-plus"/></svg> Ekle</button>';
     
     let btnDetay = '<button class="pbtn ikincil" style="padding:5px 8px;font-size:11px;margin-right:2px;" onclick="acLumbarDetay(' + p.id + ')">👁️</button>';
     
@@ -11020,7 +11280,7 @@ function acLumbarDetay(id) {
           avansHtml += avansList.map(a => '<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px dashed rgba(220,38,38,.2);font-size:12.5px;gap:8px;"><span style="color:var(--muted);font-weight:600;white-space:nowrap;">' + avansTarihGoster(a.tarih) + '</span><span style="flex:1;margin:0 8px;color:var(--muted);font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + esc(a.not || '') + '">' + esc(a.not || (a.tur === 'banka' ? 'Banka' : 'Elden')) + '</span><span style="color:#dc2626;font-weight:900;white-space:nowrap;">₺' + fmtTL(a.tutar) + '</span></div>').join('');
           avansHtml += '<div style="display:flex;justify-content:space-between;padding-top:10px;margin-top:6px;border-top:2px solid rgba(220,38,38,.3);"><span style="font-weight:900;font-size:13px;">TOPLAM</span><span style="font-weight:900;font-size:16px;color:#dc2626;">₺' + fmtTL(toplamAvans) + '</span></div></div>';
         }
-        box.innerHTML = '<div style="text-align:center;margin-bottom:20px;"><div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--primary));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;margin:0 auto 12px;">' + basHarfler(p.ad) + '</div><div style="font-size:22px;font-weight:900;">' + esc(p.ad) + '</div><div style="font-size:13px;color:var(--muted);margin-top:4px;">Sicil: <b>' + esc(p.sicil) + '</b> • ' + esc(p.meslek) + '</div><div style="display:inline-block;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;margin-top:8px;background:' + (y ? 'rgba(245,158,11,.18)' : 'rgba(2,132,199,.15)') + ';color:' + (y ? '#d97706' : 'var(--primary-light)') + ';">' + tR + '</div>' + (p.kaynak === 'puantaj' ? '<div style="display:inline-block;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;margin-top:8px;margin-left:6px;background:rgba(124,58,237,.15);color:#7c3aed;">📊 Puantajdan geldi</div>' : '') + '</div>' + '<div style="background:var(--bg);padding:14px;border-radius:10px;border:1px solid var(--border);margin-bottom:16px;"><div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;margin-bottom:4px;">' + tB + '</div><div style="font-size:20px;font-weight:900;' + (maasVar ? (y ? 'color:#d97706;' : 'color:var(--primary-light);') : 'color:var(--muted);font-size:16px;') + '">' + tD + '</div></div>' + ozetHtml + avansHtml + kesintiHtml + ekstraHtml + (ops.length ? '<div style="background:var(--bg);border-radius:10px;padding:14px;margin-bottom:16px;border:1px solid var(--border);">' + ops.map(([k, v]) => '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--border);font-size:13px;gap:10px;"><span style="color:var(--muted);font-weight:600;">' + k + '</span><b style="text-align:right;word-break:break-all;">' + esc(v) + '</b></div>').join('') + '</div>' : '') + (p.not ? '<div style="background:rgba(245,158,11,.08);border-left:3px solid #f59e0b;padding:12px;border-radius:8px;margin-bottom:16px;font-size:13px;">📝 <b>Not:</b> ' + esc(p.not) + '</div>' : '') + '<div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn-kaydet" style="flex:1;min-width:120px;" onclick="kapatModal(\'profilModal\');setTimeout(()=>acPersonelDuzenle(' + p.id + '),150);">✏️ Düzenle</button><button style="padding:11px 22px;border-radius:8px;border:none;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;color:#fff;background:linear-gradient(135deg,#dc2626,#991b1b);" onclick="personelSil(' + p.id + ')">🗑️ Sil</button></div>';        acModal('profilModal');
+        box.innerHTML = '<div style="text-align:center;margin-bottom:20px;"><div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--primary));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;margin:0 auto 12px;">' + basHarfler(p.ad) + '</div><div style="font-size:22px;font-weight:900;">' + esc(p.ad) + '</div><div style="font-size:13px;color:var(--muted);margin-top:4px;">Sicil: <b>' + esc(p.sicil) + '</b> • ' + esc(p.meslek) + '</div><div style="display:inline-block;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;margin-top:8px;background:' + (y ? 'rgba(245,158,11,.18)' : 'rgba(2,132,199,.15)') + ';color:' + (y ? '#d97706' : 'var(--primary-light)') + ';">' + tR + '</div>' + (p.kaynak === 'puantaj' ? '<div style="display:inline-block;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;margin-top:8px;margin-left:6px;background:rgba(124,58,237,.15);color:#7c3aed;">📊 Puantajdan geldi</div>' : '') + '</div>' + '<div style="background:var(--bg);padding:14px;border-radius:10px;border:1px solid var(--border);margin-bottom:16px;"><div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;margin-bottom:4px;">' + tB + '</div><div style="font-size:20px;font-weight:900;' + (maasVar ? (y ? 'color:#d97706;' : 'color:var(--primary-light);') : 'color:var(--muted);font-size:16px;') + '">' + tD + '</div></div>' + ozetHtml + avansHtml + kesintiHtml + ekstraHtml + (ops.length ? '<div style="background:var(--bg);border-radius:10px;padding:14px;margin-bottom:16px;border:1px solid var(--border);">' + ops.map(([k, v]) => '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--border);font-size:13px;gap:10px;"><span style="color:var(--muted);font-weight:600;">' + k + '</span><b style="text-align:right;word-break:break-all;">' + esc(v) + '</b></div>').join('') + '</div>' : '') + (p.not ? '<div style="background:rgba(245,158,11,.08);border-left:3px solid #f59e0b;padding:12px;border-radius:8px;margin-bottom:16px;font-size:13px;">📝 <b>Not:</b> ' + esc(p.not) + '</div>' : '') + '<div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn-kaydet" style="flex:1;min-width:120px;" onclick="kapatModal(\'profilModal\');setTimeout(()=>acPersonelDuzenle(' + p.id + '),150);">✏️ Düzenle</button><button style="padding:11px 22px;border-radius:8px;border:none;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;color:#fff;background:linear-gradient(135deg,#dc2626,#991b1b);" onclick="personelSil(' + p.id + ')"><svg class="ic btn-i"><use href="#i-trash"/></svg> Sil</button></div>';        acModal('profilModal');
                 const hSel = document.getElementById('havaSehirSelect');
         if (hSel) {
           try {
@@ -12195,7 +12455,7 @@ async function yedekAlHTML() {
         document.body.classList.remove('kilitli-mod');
         const ikon = document.getElementById('kilitIkon');
         const btn = document.getElementById('kilitBtn');
-        if (ikon) ikon.innerText = '🔓';
+        if (ikon) ikon.innerHTML = '<svg class="ic"><use href="#i-unlock"/></svg>';
         if (btn) {
           btn.style.background = '';
           btn.style.borderColor = '';
@@ -12210,7 +12470,7 @@ async function yedekAlHTML() {
         document.body.classList.add('kilitli-mod');
         const ikon = document.getElementById('kilitIkon');
         const btn = document.getElementById('kilitBtn');
-        if (ikon) ikon.innerText = '🔒';
+        if (ikon) ikon.innerHTML = '<svg class="ic"><use href="#i-lock"/></svg>';
         if (btn) {
           btn.style.background = 'rgba(220, 38, 38, .25)';
           btn.style.borderColor = 'rgba(220, 38, 38, .6)';
@@ -12407,7 +12667,7 @@ function dunOzetiTarihSecildi() {
         const alt = document.getElementById('puantajAlt');
         if (!head || !body) return;
         const mt = document.getElementById('meslekToggle');
-        if (mt) { mt.innerText = payState.meslekGizli ? '👁️ Mesleği Göster' : '👁️ Mesleği Gizle'; mt.classList.toggle('aktif', payState.meslekGizli); }
+        if (mt) { mt.innerHTML = (payState.meslekGizli ? '<svg class="ic btn-i"><use href="#i-eye"/></svg> Mesleği Göster' : '<svg class="ic btn-i"><use href="#i-eye"/></svg> Mesleği Gizle'); mt.classList.toggle('aktif', payState.meslekGizli); }
         const pt = document.getElementById('pazarToggle');
         if (pt) { pt.innerText = '🟨 Pazar Rengi: ' + (payState.pazarRenk ? 'Açık' : 'Kapalı'); pt.classList.toggle('aktif', payState.pazarRenk); }
         let h = '<tr>';
@@ -15377,7 +15637,7 @@ h += '<td class="normal-gun">' + (normalGun === 0 ? '' : normalGun) + '</td>';
           let ustBtnHtml = '<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">';
           ustBtnHtml += '<button class="pbtn ikincil" onclick="acAnimsaticiGecmis()" style="font-size:11px;padding:7px 14px;">📜 Geçmiş</button>';
           ustBtnHtml += '<button class="pbtn ikincil" onclick="animsaticiTumunuSabitle()" style="font-size:11px;padding:7px 14px;">📌 Hepsini Gizle (24s)</button>';
-          ustBtnHtml += '<button class="pbtn ikincil" onclick="animsaticiSabitleriTemizle()" style="font-size:11px;padding:7px 14px;color:#dc2626;border-color:rgba(220,38,38,.3);">🔓 Tüm Gizlemeleri Kaldır</button>';
+          ustBtnHtml += '<button class="pbtn ikincil" onclick="animsaticiSabitleriTemizle()" style="font-size:11px;padding:7px 14px;color:#dc2626;border-color:rgba(220,38,38,.3);"><svg class="ic btn-i"><use href="#i-unlock"/></svg> Tüm Gizlemeleri Kaldır</button>';
           ustBtnHtml += '</div>';
           
           el.innerHTML = ozetHtml + ustBtnHtml + liste.map((a, i) => {
@@ -15433,7 +15693,7 @@ h += '<td class="normal-gun">' + (normalGun === 0 ? '' : normalGun) + '</td>';
           '<button onclick="animsaticiSabitAction(\'' + ikon + '\',\'24s\');this.parentElement.remove();" style="display:block;width:100%;text-align:left;padding:9px 14px;background:transparent;border:none;color:var(--text);font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:6px;">📌 24 saat gizle</button>' +
           '<button onclick="animsaticiSabitAction(\'' + ikon + '\',\'1h\');this.parentElement.remove();" style="display:block;width:100%;text-align:left;padding:9px 14px;background:transparent;border:none;color:var(--text);font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:6px;">⏰ 1 saat ertele</button>' +
           '<button onclick="animsaticiSabitAction(\'' + ikon + '\',\'3h\');this.parentElement.remove();" style="display:block;width:100%;text-align:left;padding:9px 14px;background:transparent;border:none;color:var(--text);font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:6px;">⏰ 3 saat ertele</button>' +
-          '<button onclick="animsaticiSabitAction(\'' + ikon + '\',\'1g\');this.parentElement.remove();" style="display:block;width:100%;text-align:left;padding:9px 14px;background:transparent;border:none;color:var(--text);font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:6px;">📅 Yarın hatırlat</button>';
+          '<button onclick="animsaticiSabitAction(\'' + ikon + '\',\'1g\');this.parentElement.remove();" style="display:block;width:100%;text-align:left;padding:9px 14px;background:transparent;border:none;color:var(--text);font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:6px;"><svg class="ic btn-i"><use href="#i-calendar"/></svg> Yarın hatırlat</button>';
         
         const rect = e.currentTarget.getBoundingClientRect();
         menu.style.top = (rect.bottom + 4) + 'px';
@@ -15511,7 +15771,7 @@ h += '<td class="normal-gun">' + (normalGun === 0 ? '' : normalGun) + '</td>';
         
         el.innerHTML = '<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">' +
           '<button class="pbtn" onclick="acAnimsaticiModal()" style="font-size:11px;padding:7px 14px;">← Anımsatıcılara Dön</button>' +
-          '<button class="pbtn ikincil" onclick="animsaticiGecmisTemizle()" style="font-size:11px;padding:7px 14px;color:#dc2626;border-color:rgba(220,38,38,.3);">🗑️ Geçmişi Temizle</button>' +
+          '<button class="pbtn ikincil" onclick="animsaticiGecmisTemizle()" style="font-size:11px;padding:7px 14px;color:#dc2626;border-color:rgba(220,38,38,.3);"><svg class="ic btn-i"><use href="#i-trash"/></svg> Geçmişi Temizle</button>' +
           '</div>' +
           gecmis.map(g => {
             const zaman = new Date(g.zaman).toLocaleString('tr-TR');
@@ -15700,7 +15960,7 @@ async function havaTopbarGuncelle() {
 
   const data = await havaDurumuYukle();
   if (!data || !data.current) {
-    ikon.innerText = '🌤️';
+    ikon.innerHTML = '<svg class="ic" style="width:20px;height:20px;"><use href="#i-cloud"/></svg>';
     sicaklik.innerText = '--°';
     return;
   }
@@ -15708,7 +15968,7 @@ async function havaTopbarGuncelle() {
   const kod = data.current.weather_code;
   const derece = Math.round(data.current.temperature_2m);
 
-  ikon.innerText = havaIkonAl(kod);
+  ikon.innerHTML = '<svg class="ic" style="width:20px;height:20px;"><use href="#i-cloud"/></svg>';
   sicaklik.innerText = derece + '°';
   btn.title = aktifSehirAl().ad + ' • ' + havaDurumAdi(kod) + ' • ' + derece + '°C';
 }
@@ -16541,10 +16801,10 @@ function kisiEkstraListesi(sicil) {
 
         const mesaj = egitimMesajOlustur();
 
-        let html = '<div class="egitim-toplam-bar"><div>📊 <b>' + egitimSonuclari.length + '</b> gün • 👥 <span class="buyuk">' + toplamKisi + '</span> kişi</div><button class="pbtn ikincil" onclick="egitimTemizle()" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);">🗑️ Listeyi Temizle</button></div>';
+        let html = '<div class="egitim-toplam-bar"><div>📊 <b>' + egitimSonuclari.length + '</b> gün • 👥 <span class="buyuk">' + toplamKisi + '</span> kişi</div><button class="pbtn ikincil" onclick="egitimTemizle()" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);"><svg class="ic btn-i"><use href="#i-trash"/></svg> Listeyi Temizle</button></div>';
 
         html += '<div class="egitim-mesaj-kutu" style="margin-bottom:20px;">';
-        html += '<div class="egitim-mesaj-baslik"><span>📱 WhatsApp Mesajı — Tüm Hafta Tek Mesaj</span><button class="egitim-kopyala" onclick="egitimKopyala()">📋 Kopyala</button></div>';
+        html += '<div class="egitim-mesaj-baslik"><span>📱 WhatsApp Mesajı — Tüm Hafta Tek Mesaj</span><button class="egitim-kopyala" onclick="egitimKopyala()"><svg class="ic btn-i"><use href="#i-file"/></svg> Kopyala</button></div>';
         html += '<div class="egitim-mesaj-icerik">' + esc(mesaj) + '</div>';
         html += '</div>';
 
@@ -17661,9 +17921,9 @@ function renderIcralar() {
       (i.aciklama ? '<div class="icra-not">📝 ' + esc(i.aciklama) + '</div>' : '') +
 
       '<div class="icra-aksiyonlar">' +
-        '<button class="icra-btn odeme" onclick="acIcraOdemeModal(' + i.id + ')">💰 Ödeme Ekle</button>' +
+        '<button class="icra-btn odeme" onclick="acIcraOdemeModal(' + i.id + ')"><svg class="ic btn-i"><use href="#i-money"/></svg> Ödeme Ekle</button>' +
         '<button class="icra-btn" onclick="acIcraDuzenleModal(' + i.id + ')">✏️ Düzenle</button>' +
-        '<button class="icra-btn sil" onclick="icraSil(' + i.id + ')">🗑️ Sil</button>' +
+        '<button class="icra-btn sil" onclick="icraSil(' + i.id + ')"><svg class="ic btn-i"><use href="#i-trash"/></svg> Sil</button>' +
       '</div>' +
     '</div>';
   }).join('');
@@ -20687,7 +20947,7 @@ function notKartHtml(n) {
     '<div class="not-aksiyonlar">' +
       '<button class="not-aksiyon-btn pin' + (n.pinli ? ' aktif' : '') + '" onclick="notPinle(' + n.id + ')" title="' + (n.pinli ? 'Sabitlemeyi kaldır' : 'Sabitle') + '">' + (n.pinli ? '📌 Sabit' : '📍 Sabitle') + '</button>' +
       '<button class="not-aksiyon-btn duzenle" onclick="notDuzenle(' + n.id + ')" title="Düzenle">✏️ Düzenle</button>' +
-      '<button class="not-aksiyon-btn sil" onclick="notSil(' + n.id + ')" title="Sil">🗑️ Sil</button>' +
+      '<button class="not-aksiyon-btn sil" onclick="notSil(' + n.id + ')" title="Sil"><svg class="ic btn-i"><use href="#i-trash"/></svg> Sil</button>' +
     '</div>' +
   '</div>';
 }
