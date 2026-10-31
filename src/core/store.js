@@ -6,7 +6,7 @@
 //   - kalıcı veri storage.js üzerinden otomatik yazılır
 // ============================================================
 
-import { loadState, saveSlice } from './storage.js';
+import { loadState, saveSlice, hydrateEgitim } from './storage.js';
 
 const listeners = new Map(); // key -> Set<fn>
 
@@ -59,6 +59,15 @@ export const state = {
     gemiler: [],            // [{id, ad, yevmiye, tarih, not, olusturma}]
     goturuler: [],          // [{id, ad, tutar, tarih, not, olusturma}]
   },
+
+  // --- Lumbar arşivi: globalPersoneller zaten `personeller` diliminde; ek state yok ---
+
+  // --- Eğitim Takibi (legacy: erp_umit_egitim_v1 + erp_umit_egitim_gecmis_v1) ---
+  egitimSonuclari: [],      // [{tarih, tarihGoster, gunAdi, modul, salon, kisiler:[{id,isim}]}]
+  egitimGecmis: [],         // [{id, tarih, modul, salon, gunSayisi, kisiSayisi, ilkGun, sonGun, sonuclar}]
+
+  // --- Firma ayarları (legacy: umit_erp_ayar_v1 — ayarService yönetir) ---
+  ayar: { firma: 'Genel', firmaResmi: '', sesAcik: true, sesSeviye: 0.6 },
 };
 
 /** Abonelik: belirli bir state anahtarı değiştiğinde cb çalışır. */
@@ -104,5 +113,11 @@ export function hydrate() {
     state[key] = value;
     notify(key);
   });
+  // Eğitim legacy ambalajı: { sonuclar } -> egitimSonuclari + ayrı geçmiş anahtarı
+  const eg = hydrateEgitim();
+  state.egitimSonuclari = eg.sonuclar;
+  state.egitimGecmis = eg.gecmis;
+  notify('egitimSonuclari');
+  notify('egitimGecmis');
   return state;
 }

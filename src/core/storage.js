@@ -14,7 +14,9 @@ export const PERSIST_MAP = {
   vardiyaKurallari: `${PREFIX}vardiya_kurallari_v1`,
   notlar: `${PREFIX}notlar_v1`,
   sonPuantajTarihi: `${PREFIX}son_puantaj_tarihi`,
-  egitim: 'erp_umit_egitim_v1',
+  egitimSonuclari: '@egitim',          // legacy ambalajı: erp_umit_egitim_v1 -> { sonuclar }
+  egitimGecmis: 'erp_umit_egitim_gecmis_v1',
+  ayar: `${PREFIX}ayar_v1`,            // ayarService ile aynı anahtar
   donemler: `${PREFIX}donemler_v1`,
   aktifDonemId: `${PREFIX}aktif_donem_id_v1`,
   // puantaj dönem bazlıdır; anahtar statik değil — saveSlice içinde çözülür
@@ -71,16 +73,34 @@ export function writeKey(lsKey, value) {
 export function loadState() {
   const out = {};
   for (const [stateKey, lsKey] of Object.entries(PERSIST_MAP)) {
+    if (lsKey === '@egitim') continue; // özel ambalaj — hydrateEgitim() çözer
     const value = readKey(lsKey);
     if (value !== undefined) out[stateKey] = value;
   }
   return out;
 }
 
+/**
+ * Legacy eğitim ambalajını çözer:
+ *   erp_umit_egitim_v1         -> { sonuclar: [...] }        -> state.egitimSonuclari
+ *   erp_umit_egitim_gecmis_v1  -> [...]                      -> state.egitimGecmis
+ */
+export function hydrateEgitim() {
+  const pkg = readKey('erp_umit_egitim_v1');
+  const sonuclar = Array.isArray(pkg?.sonuclar) ? pkg.sonuclar : [];
+  const gecmis = readKey('erp_umit_egitim_gecmis_v1');
+  return { sonuclar, gecmis: Array.isArray(gecmis) ? gecmis : [] };
+}
+
 /** İlgili dilimi karşılık gelen anahtara yazar. */
 export function saveSlice(stateKey, value) {
   let lsKey = PERSIST_MAP[stateKey];
   if (typeof lsKey === 'string' && lsKey.startsWith('@')) {
+    if (lsKey === '@egitim') {
+      // Eğitim ambalajı: legacy ile birebir { sonuclar } olarak yazılır
+      writeKey('erp_umit_egitim_v1', { sonuclar: value });
+      return;
+    }
     // Dönem bazlı: '@mesai' -> 'mesai', aktifDonemId'den çözülür
     const modul = lsKey.slice(1);
     const donemId = readKey(`${PREFIX}aktif_donem_id_v1`);
