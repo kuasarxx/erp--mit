@@ -431,3 +431,107 @@
 .mt-2 { margin-top: var(--space-2); }
 td.empty-state { text-align: center; padding: var(--space-6) 0; color: var(--text-secondary); }
 tr.total-row td { background: var(--surface-sunken); font-weight: 800; }
+
+/* ============================================================
+   DÖNEMLER SAYFASI
+   ============================================================ */
+.page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--font-size-xl);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+.page-title .icon { width: 22px; height: 22px; color: var(--color-primary); }
+.page-subtitle {
+  margin-top: 4px;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.info-list { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+.info-list li { font-size: var(--font-size-sm); color: var(--text-secondary); line-height: 1.55; }
+.req { color: var(--color-danger); }
+.checkbox-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox-line input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--color-primary); }
+.form-group--full { grid-column: 1 / -1; }
+
+.donem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+.donem-kart {
+  background: var(--surface-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  cursor: pointer;
+  transition: box-shadow .15s ease, transform .15s ease, border-color .15s ease;
+  outline: none;
+}
+.donem-kart:hover, .donem-kart:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.donem-kart.aktif {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary) inset, var(--shadow-md);
+}
+.donem-kart.arsivli { opacity: .72; background: var(--surface-sunken); }
+.donem-kart-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.donem-kart-icon {
+  width: 38px; height: 38px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-md);
+  background: rgba(37, 99, 235, .10);
+  color: var(--color-primary);
+}
+.donem-kart-icon .icon { width: 20px; height: 20px; }
+.donem-kart-ad { font-size: var(--font-size-lg); font-weight: 800; color: var(--text-primary); }
+.donem-kart-alt { font-size: var(--font-size-xs); color: var(--text-secondary); margin-top: 2px; }
+.donem-kart-stats {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--border-color);
+}
+.donem-kart-stat {
+  display: flex; align-items: center; gap: 6px;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+.donem-kart-stat b { color: var(--text-primary); font-size: var(--font-size-sm); }
+.donem-kart-stat .icon { width: 14px; height: 14px; }
+.donem-kart-aksiyon {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: var(--space-3);
+}
+.donem-kart-aksiyon .icon-btn[disabled] { opacity: .35; cursor: not-allowed; }

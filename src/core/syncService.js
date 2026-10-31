@@ -9,7 +9,7 @@
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from './firebase.js';
 import { auth } from './firebase.js';
-import { state } from './store.js';
+import { state, setState } from './store.js';
 import { readKey, writeKey } from './storage.js';
 
 let timer = null;
@@ -28,13 +28,53 @@ function anaPayload() {
   };
 }
 
+/** Dönem verisi — legacy donemGec()/yeniDonemKaydet() alan adlarıyla birebir. */
 function donemPayload() {
   return {
     donemId: state.aktifDonemId,
+    personeller: state.puantaj?.personeller || [],
     payState: state.puantaj,
-    personeller: state.personeller,
+    avanslar: state.avanslar || [],
+    mesaiVerileri: state.mesai?.veriler || {},
+    mesaiState: state.mesai?.state || {},
+    muhasebeEkstra: state.muhasebe?.ekstra || {},
+    muhasebeState: state.muhasebe?.state || {},
+    kesintiler: state.kesintiler || [],
+    kesintiAyar: state.kesintiAyar || {},
+    ekstraKesintiler: state.ekstraKesintiler || [],
+    icralar: state.icralar || [],
+    ikinciOdeme: state.ikinciOdeme || {},
+    gemiler: state.gemi?.gemiler || [],
+    goturuler: state.gemi?.goturuler || [],
     sonGuncelleme: new Date().toISOString(),
   };
+}
+
+/** Firestore dönem dokümanını store dilimlerine yazar. */
+export function applyDonemDoc(d) {
+  if (!d) return;
+  setState('puantaj', {
+    ...(d.payState || {}),
+    personeller: d.payState?.personeller || d.personeller || [],
+  }, { persist: false });
+  setState('avanslar', d.avanslar || [], { persist: false });
+  setState('mesai', {
+    veriler: d.mesaiVerileri || {},
+    state: d.mesaiState || {},
+  }, { persist: false });
+  setState('muhasebe', {
+    ekstra: d.muhasebeEkstra || {},
+    state: d.muhasebeState || {},
+  }, { persist: false });
+  setState('kesintiler', d.kesintiler || [], { persist: false });
+  setState('kesintiAyar', d.kesintiAyar || {}, { persist: false });
+  setState('ekstraKesintiler', d.ekstraKesintiler || [], { persist: false });
+  setState('icralar', d.icralar || [], { persist: false });
+  setState('ikinciOdeme', d.ikinciOdeme || {}, { persist: false });
+  setState('gemi', {
+    gemiler: d.gemiler || [],
+    goturuler: d.goturuler || [],
+  }, { persist: false });
 }
 
 /** Hemen buluta yazar (KAYDET butonu bunu çağırır). */

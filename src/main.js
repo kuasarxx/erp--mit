@@ -22,7 +22,7 @@ import './pages/ikinciOdeme.js';
 
 // Diğer sayfalar tek tek eklenecek (adım adım plan):
 import './pages/muhasebe.js';
-// import './pages/donemler.js';
+import './pages/donemler.js';
 import './pages/gemi.js';
 // import './pages/lumbar.js';
 // import './pages/egitim.js';

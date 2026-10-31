@@ -14,6 +14,18 @@ const pages = new Map();
  * @param {Function} render - (container) => void | cleanup()
  */
 export function registerPage(id, meta, render) {
+  // Desteklenen iki çağrı biçimi:
+  //   registerPage('id', {title, icon, section}, (el) => cleanup | void)
+  //   registerPage({ id, title, icon, mount(root) {...} })
+  if (typeof id === 'object' && id !== null) {
+    const cfg = id;
+    pages.set(cfg.id, {
+      id: cfg.id,
+      meta: { title: cfg.title, icon: cfg.icon, section: cfg.section || cfg.group },
+      render: (el) => cfg.mount(el),
+    });
+    return;
+  }
   pages.set(id, { id, meta, render });
 }
 

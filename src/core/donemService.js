@@ -210,3 +210,179 @@ export function switchDonem(yil, ay) {
   // Sayfalar dönem dilimlerini yeniden okusun
   window.dispatchEvent(new CustomEvent('donemDegisti', { detail: { id } }));
 }
+
+// ============================================================
+// Dönem yönetimi UI işlemleri (legacy donemGec / yeniDonemKaydet /
+// donemArsivle / donemSil / donemYenidenAdlandir karşılıkları)
+// ============================================================
+
+import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import { db, auth } from './firebase.js';
+import { applyDonemDoc } from './syncService.js';
+
+/** Yardımcı: yol parçalarından Firestore doküman referansı üretir. */
+function docRef(...yol) { return doc(db, ...yol); }
+/** Yardımcı: merge yazımı (legacy setDoc(..., {merge:true}) karşılığı). */
+function setDocMerged(yol, veri) { return setDoc(doc(db, ...yol), veri, { merge: true }); }
+
+/** Tüm dönem modül anahtarları (legacy donemSil listesiyle birebir). */
+const DONEM_MODULLERI = ['personel', 'puantaj', 'avans', 'mesai', 'kesinti',
+  'muhasebe', 'ekstra', 'gemi', 'icra', 'ikinciOdeme'];
+
+/** Aktif dönemin tüm dilimlerini localStorage'a yazar (legacy adim 5 karsiligi). */
+function aktifDilimleriYaz(id) {
+  writeKey(periodKey(id, 'personel'), state.puantaj.personeller || []);
+  writeKey(periodKey(id, 'puantaj'), state.puantaj);
+  writeKey(periodKey(id, 'avans'), state.avanslar);
+  writeKey(periodKey(id, 'mesai'), state.mesai);
+  writeKey(periodKey(id, 'muhasebe'), state.muhasebe);
+  writeKey(periodKey(id, 'kesinti'), { liste: state.kesintiler, ayar: state.kesintiAyar });
+  writeKey(periodKey(id, 'ekstra'), state.ekstraKesintiler);
+  writeKey(periodKey(id, 'gemi'), state.gemi);
+  writeKey(periodKey(id, 'icra'), state.icralar);
+  writeKey(periodKey(id, 'ikinciOdeme'), state.ikinciOdeme);
+}
+
+/**
+ * Döneme geçer — legacy donemGec() ile aynı sıra:
+ * 1) eski dönemi kaydet (localStorage + Firestore), 2) aktif dönemi değiştir,
+ * 3) hedef dönemin verisini yükle (önce LS, yoksa Firestore), 4) duyur.
+ */
+export async function gecDonem(id) {
+  const hedef = state.donemler.find((d) => d.id === id);
+  if (!hedef) throw new Error('Dönem bulunamadı');
+  if (id === state.aktifDonemId) return { atlandi: true };
+  if (hedef.arsiv) throw new Error(`"${hedef.ad}" arşivlenmiş. Düzenlemek için önce arşivden çıkar.`);
+
+  // 1) Eski dönemin verilerini kalıcı yerlere yaz
+  const eskiId = state.aktifDonemId;
+  if (eskiId) aktifDilimleriYaz(eskiId);
+  try { await scheduleCloudSave(); } catch (e) { console.warn('[donem] eski dönem buluta yazılamadı:', e?.message); }
+
+  // 2) Aktif dönemi değiştir
+  setState('aktifDonemId', id);
+  writeKey('umit_erp_aktif_donem_id_v1', id);
+
+  // 3) Hedef dönemi yükle: localStorage'daki dilimler öncelikli
+  yukleDonemDilimleri(id);
+  // Puantaj dilimi hiç yoksa ve bulut bağlıysa Firestore'dan çek
+  const puantajVar = readKey(periodKey(id, 'puantaj')) !== undefined;
+  if (!puantajVar) {
+    const user = auth.currentUser;
+    if (user) {
+      try {
+        const snap = await getDoc(docRef('kullanicilar', user.uid, 'donemVerileri', id));
+        if (snap.exists()) {
+          applyDonemDoc(snap.data());
+          aktifDilimleriYaz(id);
+        }
+      } catch (e) { console.warn('[donem] firestore okuma:', e?.message); }
+    }
+  }
+
+  // Dönem ay/yıl bilgisi seçicilere yansısın
+  setState('puantaj', { ...state.puantaj, yil: hedef.yil, ay: hedef.ay }, { persist: false });
+  setState('mesai', { ...state.mesai, state: { yil: hedef.yil, ay: hedef.ay } }, { persist: false });
+  setState('muhasebe', { ...state.muhasebe, state: { yil: hedef.yil, ay: hedef.ay } }, { persist: false });
+
+  // Ana dokümana aktif dönemi işle + dönem verisini buluta yaz
+  const user = auth.currentUser;
+  if (user) {
+    try {
+      await setDocMerged(['kullanicilar', user.uid], { aktifDonemId: id });
+      await syncNowSafe();
+    } catch (e) { console.warn('[donem] buluta yazma:', e?.message); }
+  }
+
+  window.dispatchEvent(new CustomEvent('donemDegisti', { detail: { id } }));
+  return { hedef };
+}
+
+/** Bulut bağlıysa hemen senkronla (hata fırlatmaz). */
+async function syncNowSafe() {
+  try {
+    const m = await import('./syncService.js');
+    if (auth.currentUser) await m.syncNow();
+  } catch (e) { /* çevrimdışı ise sorun değil */ }
+}
+async function scheduleCloudSave() { await syncNowSafe(); }
+
+/** Yeni dönem açar — legacy yeniDonemKaydet() karşılığı. */
+export async function yeniDonemOlustur({ yil, ay, ad = '', personelKopyala = false }) {
+  const id = makeDonemId(yil, ay);
+  if (state.donemler.find((d) => d.id === id)) throw new Error(`${AYLAR[ay]} ${yil} dönemi zaten var`);
+
+  const donem = { id, ad: ad.trim() || `${AYLAR[ay]} ${yil}`, yil, ay, olusturma: new Date().toISOString() };
+  setState('donemler', [...state.donemler, donem]);
+
+  // Boş dönem dilimlerini hazırla (legacy bosVeri şemasıyla birebir)
+  const bosPuantaj = { yil, ay, personeller: [], pazarRenk: true, meslekGizli: false };
+  if (personelKopyala && state.puantaj.personeller.length) {
+    bosPuantaj.personeller = JSON.parse(JSON.stringify(state.puantaj.personeller));
+  }
+  writeKey(periodKey(id, 'puantaj'), bosPuantaj);
+  writeKey(periodKey(id, 'personel'), bosPuantaj.personeller);
+  writeKey(periodKey(id, 'avans'), []);
+  writeKey(periodKey(id, 'mesai'), { veriler: {}, state: { yil, ay } });
+  writeKey(periodKey(id, 'muhasebe'), { ekstra: {}, state: { yil, ay } });
+  writeKey(periodKey(id, 'kesinti'), { liste: [], ayar: state.kesintiAyar });
+  writeKey(periodKey(id, 'ekstra'), []);
+  writeKey(periodKey(id, 'icra'), []);
+  writeKey(periodKey(id, 'ikinciOdeme'), {});
+  writeKey(periodKey(id, 'gemi'), { gemiler: [], goturuler: [] });
+
+  await gecDonem(id);
+
+  const user = auth.currentUser;
+  if (user) {
+    try { await setDocMerged(['kullanicilar', user.uid], { donemler: state.donemler }); } catch (e) { /* LS yeterli */ }
+  }
+  return { donem, kopyalanan: bosPuantaj.personeller.length };
+}
+
+/** Dönemi arşivler / arşivden çıkarır — legacy donemArsivle() karşılığı. */
+export function arsivleDonem(id) {
+  if (id === state.aktifDonemId) throw new Error('Aktif dönem arşivlenemez. Önce başka döneme geç.');
+  const d = state.donemler.find((x) => x.id === id);
+  if (!d) throw new Error('Dönem bulunamadı');
+  d.arsiv = !d.arsiv;
+  setState('donemler', [...state.donemler]);
+  return d;
+}
+
+/** Dönem adını değiştirir — legacy donemYenidenAdlandir() karşılığı. */
+export function adlandirDonem(id, yeniAd) {
+  const temiz = (yeniAd || '').trim();
+  if (!temiz) throw new Error('Ad boş olamaz');
+  const d = state.donemler.find((x) => x.id === id);
+  if (!d) throw new Error('Dönem bulunamadı');
+  d.ad = temiz;
+  setState('donemler', [...state.donemler]);
+  return d;
+}
+
+/** Dönemi tüm verileriyle siler — legacy donemSil() karşılığı. */
+export async function silDonem(id) {
+  if (id === state.aktifDonemId) throw new Error('Aktif dönem silinemez. Önce başka döneme geç.');
+  if (state.donemler.length <= 1) throw new Error('En az bir dönem kalmalı');
+  const d = state.donemler.find((x) => x.id === id);
+  if (!d) throw new Error('Dönem bulunamadı');
+
+  // 1) localStorage dilimleri
+  DONEM_MODULLERI.forEach((modul) => {
+    try { localStorage.removeItem(periodKey(id, modul)); } catch (e) { /* yoksay */ }
+  });
+
+  // 2) Liste
+  setState('donemler', state.donemler.filter((x) => x.id !== id));
+
+  // 3) Firestore
+  const user = auth.currentUser;
+  if (user) {
+    try {
+      await deleteDoc(docRef('kullanicilar', user.uid, 'donemVerileri', id));
+      await setDocMerged(['kullanicilar', user.uid], { donemler: state.donemler });
+    } catch (e) { console.warn('[donem] firestore silme:', e?.message); }
+  }
+  return d;
+}
