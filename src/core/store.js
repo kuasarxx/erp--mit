@@ -55,6 +55,10 @@ export const state = {
     ekstra: {},             // {sicil: {icra, not, ozelIsim}}
     state: { yil: new Date().getFullYear(), ay: new Date().getMonth() },
   },
+  gemi: {                   // dönem bazlı — umit_erp_<donemId>_gemi_v1 (legacy ambalajı: {gemiler, goturuler})
+    gemiler: [],            // [{id, ad, yevmiye, tarih, not, olusturma}]
+    goturuler: [],          // [{id, ad, tutar, tarih, not, olusturma}]
+  },
 };
 
 /** Abonelik: belirli bir state anahtarı değiştiğinde cb çalışır. */

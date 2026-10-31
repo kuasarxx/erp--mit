@@ -32,8 +32,14 @@ export function aktifPuantajKey() {
 }
 
 /** Bir state dilimini aktif dönem anahtarına yazar (ör. 'avanslar' -> <donem>_avans_v1). */
+const DILIM_MODUL = {
+  puantaj: 'puantaj', avanslar: 'avans', mesai: 'mesai',
+  kesintiler: 'kesinti', kesintiAyar: 'kesinti', ekstraKesintiler: 'ekstra',
+  icralar: 'icra', ikinciOdeme: 'ikinciOdeme', muhasebe: 'muhasebe', gemi: 'gemi',
+};
+
 export function saveDonemSlice(dilimAdi, value) {
-  const modul = dilimAdi.replace(/lar$/, '').replace(/ler$/, ''); // avanslar -> avans
+  const modul = DILIM_MODUL[dilimAdi] || dilimAdi.replace(/lar$/, '').replace(/ler$/, '');
   const key = aktifDonemModulKey(modul);
   if (!key) return;
   // Muhasebe ambalajı: legacy şeması {ekstra, state} tek anahtarda yaşar
@@ -178,6 +184,13 @@ function yukleDonemDilimleri(id) {
   setState('muhasebe', {
     ekstra: (mh && mh.ekstra) || {},
     state: { yil: yilS, ay, ...((mh && mh.state) || {}) },
+  }, { persist: false });
+
+  // Gemi — legacy ambalajı: { gemiler, goturuler }
+  const gm = readKey(periodKey(id, 'gemi'));
+  setState('gemi', {
+    gemiler: (gm && Array.isArray(gm.gemiler)) ? gm.gemiler : [],
+    goturuler: (gm && Array.isArray(gm.goturuler)) ? gm.goturuler : [],
   }, { persist: false });
 }
 
