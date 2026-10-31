@@ -26,6 +26,7 @@ export const PERSIST_MAP = {
   ekstraKesintiler: '@ekstra',
   icralar: '@icra',
   ikinciOdeme: '@ikinciOdeme',
+  muhasebe: '@muhasebe',
   'ui.theme': `${PREFIX}theme`,
 };
 

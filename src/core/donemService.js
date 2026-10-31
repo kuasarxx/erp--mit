@@ -36,6 +36,12 @@ export function saveDonemSlice(dilimAdi, value) {
   const modul = dilimAdi.replace(/lar$/, '').replace(/ler$/, ''); // avanslar -> avans
   const key = aktifDonemModulKey(modul);
   if (!key) return;
+  // Muhasebe ambalajı: legacy şeması {ekstra, state} tek anahtarda yaşar
+  if (dilimAdi === 'muhasebe') {
+    const key2 = aktifDonemModulKey('muhasebe');
+    if (key2) writeKey(key2, value);
+    return;
+  }
   // Kesinti ambalajı: liste ve ayar tek anahtarda {liste, ayar} olarak yaşar
   if (modul === 'kesinti') {
     const mevcut = readKey(key) || {};
@@ -166,6 +172,13 @@ function yukleDonemDilimleri(id) {
   // 2. Ödeme manuel alanları — nesne haritası (legacy: donemKey('ikinciOdeme'))
   const io = readKey(periodKey(id, 'ikinciOdeme'));
   setState('ikinciOdeme', (io && typeof io === 'object' && !Array.isArray(io)) ? io : {}, { persist: false });
+
+  // Muhasebe — legacy ambalajı: { ekstra: {sicil:{icra,not,ozelIsim}}, state: {yil, ay} }
+  const mh = readKey(periodKey(id, 'muhasebe'));
+  setState('muhasebe', {
+    ekstra: (mh && mh.ekstra) || {},
+    state: { yil: yilS, ay, ...((mh && mh.state) || {}) },
+  }, { persist: false });
 }
 
 /** Store'daki puantaj dilimini aktif dönem anahtarına yazar. */

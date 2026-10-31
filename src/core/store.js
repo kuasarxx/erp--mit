@@ -51,6 +51,10 @@ export const state = {
   ekstraKesintiler: [],     // dönem bazlı — umit_erp_<donemId>_ekstra_v1
   icralar: [],              // dönem bazlı — umit_erp_<donemId>_icra_v1
   ikinciOdeme: {},          // dönem bazlı — umit_erp_<donemId>_ikinciOdeme_v1 ({sicil:{ga,rapor,sert,kira,banka}})
+  muhasebe: {               // dönem bazlı — umit_erp_<donemId>_muhasebe_v1 (legacy ambalajı: {ekstra, state})
+    ekstra: {},             // {sicil: {icra, not, ozelIsim}}
+    state: { yil: new Date().getFullYear(), ay: new Date().getMonth() },
+  },
 };
 
 /** Abonelik: belirli bir state anahtarı değiştiğinde cb çalışır. */
