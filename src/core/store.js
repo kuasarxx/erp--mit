@@ -39,6 +39,16 @@ export const state = {
     pazarRenk: true,
     meslekGizli: false,
   },
+  avanslar: [],             // dönem bazlı — umit_erp_<donemId>_avans_v1
+  mesai: {                  // dönem bazlı — umit_erp_<donemId>_mesai_v1
+    veriler: {},            // {sicil: {gun: saat}} (legacy şemasıyla birebir)
+    state: { yil: new Date().getFullYear(), ay: new Date().getMonth() },
+  },
+  kesintiler: [],           // dönem bazlı — umit_erp_<donemId>_kesinti_v1 ({liste, ayar} ambalajının liste kısmı)
+  kesintiAyar: {            // aynı anahtarda {liste, ayar} olarak saklanır
+    baslangic: '08:00', bitis: '17:00', molaBaslangic: '12:00', molaBitis: '13:00', tolGec: 5, tolErken: 5,
+  },
+  ekstraKesintiler: [],     // dönem bazlı — umit_erp_<donemId>_ekstra_v1
 };
 
 /** Abonelik: belirli bir state anahtarı değiştiğinde cb çalışır. */

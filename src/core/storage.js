@@ -19,7 +19,21 @@ export const PERSIST_MAP = {
   aktifDonemId: `${PREFIX}aktif_donem_id_v1`,
   // puantaj dönem bazlıdır; anahtar statik değil — saveSlice içinde çözülür
   puantaj: '@puantaj',
+  avanslar: '@avans',
+  mesai: '@mesai',
+  kesintiler: '@kesinti',
+  kesintiAyar: '@kesinti',
+  ekstraKesintiler: '@ekstra',
   'ui.theme': `${PREFIX}theme`,
+};
+
+/** Legacy'deki K_* sabitleri (uyumluluk için korundu). */
+export const LEGACY_KEYS = {
+  PUANTAJ: 'erp_umit_puantaj_v1',
+  AVANS: 'erp_umit_avans_v1',
+  MESAİ: 'erp_umit_mesai_v1',
+  KESINTİ: 'erp_umit_kesinti_v1',
+  MUHASEBE: 'erp_umit_muhasebe_v1',
 };
 
 /**
@@ -62,10 +76,24 @@ export function loadState() {
 /** İlgili dilimi karşılık gelen anahtara yazar. */
 export function saveSlice(stateKey, value) {
   let lsKey = PERSIST_MAP[stateKey];
-  if (lsKey === '@puantaj') {
+  if (lsKey === '@puantaj' || lsKey === '@avans' || lsKey === '@mesai' || lsKey === '@kesinti' || lsKey === '@ekstra') {
     // Dönem bazlı: aktifDonemId'den çözülür
+    const modul = lsKey.slice(1); // '@mesai' -> 'mesai'
     const donemId = readKey(`${PREFIX}aktif_donem_id_v1`);
-    lsKey = donemId ? periodKey(donemId, 'puantaj') : null;
+    lsKey = donemId ? periodKey(donemId, modul) : null;
   }
-  if (lsKey) writeKey(lsKey, value);
+  if (!lsKey) return;
+
+  // Kesinti legacy ambalajı: umit_erp_<donem>_kesinti_v1 = { liste, ayar }
+  // state'te iki ayrı dilim tutulur; yazarken ambalajı koruyoruz.
+  if (stateKey === 'kesintiler' || stateKey === 'kesintiAyar') {
+    const mevcut = readKey(lsKey) || {};
+    writeKey(lsKey, {
+      liste: stateKey === 'kesintiler' ? value : (mevcut.liste || []),
+      ayar: stateKey === 'kesintiAyar' ? value : (mevcut.ayar || {}),
+    });
+    return;
+  }
+
+  writeKey(lsKey, value);
 }
