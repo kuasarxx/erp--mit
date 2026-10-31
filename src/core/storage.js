@@ -24,6 +24,8 @@ export const PERSIST_MAP = {
   kesintiler: '@kesinti',
   kesintiAyar: '@kesinti',
   ekstraKesintiler: '@ekstra',
+  icralar: '@icra',
+  ikinciOdeme: '@ikinciOdeme',
   'ui.theme': `${PREFIX}theme`,
 };
 
@@ -76,9 +78,9 @@ export function loadState() {
 /** İlgili dilimi karşılık gelen anahtara yazar. */
 export function saveSlice(stateKey, value) {
   let lsKey = PERSIST_MAP[stateKey];
-  if (lsKey === '@puantaj' || lsKey === '@avans' || lsKey === '@mesai' || lsKey === '@kesinti' || lsKey === '@ekstra') {
-    // Dönem bazlı: aktifDonemId'den çözülür
-    const modul = lsKey.slice(1); // '@mesai' -> 'mesai'
+  if (typeof lsKey === 'string' && lsKey.startsWith('@')) {
+    // Dönem bazlı: '@mesai' -> 'mesai', aktifDonemId'den çözülür
+    const modul = lsKey.slice(1);
     const donemId = readKey(`${PREFIX}aktif_donem_id_v1`);
     lsKey = donemId ? periodKey(donemId, modul) : null;
   }

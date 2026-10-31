@@ -17,10 +17,10 @@ import './pages/avans.js';
 import './pages/mesai.js';
 import './pages/ekstra.js';
 import './pages/kesinti.js';
+import './pages/icra.js';
+import './pages/ikinciOdeme.js';
 
 // Diğer sayfalar tek tek eklenecek (adım adım plan):
-// import './pages/icra.js';
-// import './pages/ikinciOdeme.js';
 // import './pages/muhasebe.js';
 // import './pages/donemler.js';
 // import './pages/gemi.js';

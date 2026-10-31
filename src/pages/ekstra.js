@@ -22,7 +22,7 @@ export const EKSTRA_KATEGORILER = {
   kiyafet:   { ad: 'Kıyafet',   ikon: 'edit',     renk: '#8b5cf6' },
   saglik:    { ad: 'Sağlık',    ikon: 'info',     renk: '#dc2626' },
   sertifika: { ad: 'Sertifika', ikon: 'book',     renk: '#d97706' },
-  ceza:      { ad: 'Ceza',      ikon: 'alert',    renk: '#b91c1c' },
+  ceza:      { ad: 'Ceza',      ikon: 'alert-triangle', renk: '#b91c1c' },
   ekipman:   { ad: 'Ekipman',   ikon: 'wrench',   renk: '#0891b2' },
   icra:      { ad: 'İcra',      ikon: 'scale',    renk: '#7c3aed' },
   kira:      { ad: 'Kira',      ikon: 'building', renk: '#059669' },

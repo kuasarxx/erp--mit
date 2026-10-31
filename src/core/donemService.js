@@ -158,6 +158,14 @@ function yukleDonemDilimleri(id) {
   // Ekstra kesintiler — düz dizi
   const ek = readKey(periodKey(id, 'ekstra'));
   setState('ekstraKesintiler', Array.isArray(ek) ? ek : [], { persist: false });
+
+  // İcralar — düz dizi (legacy: donemKey('icra'))
+  const ic = readKey(periodKey(id, 'icra'));
+  setState('icralar', Array.isArray(ic) ? ic : [], { persist: false });
+
+  // 2. Ödeme manuel alanları — nesne haritası (legacy: donemKey('ikinciOdeme'))
+  const io = readKey(periodKey(id, 'ikinciOdeme'));
+  setState('ikinciOdeme', (io && typeof io === 'object' && !Array.isArray(io)) ? io : {}, { persist: false });
 }
 
 /** Store'daki puantaj dilimini aktif dönem anahtarına yazar. */

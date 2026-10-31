@@ -49,6 +49,8 @@ export const state = {
     baslangic: '08:00', bitis: '17:00', molaBaslangic: '12:00', molaBitis: '13:00', tolGec: 5, tolErken: 5,
   },
   ekstraKesintiler: [],     // dönem bazlı — umit_erp_<donemId>_ekstra_v1
+  icralar: [],              // dönem bazlı — umit_erp_<donemId>_icra_v1
+  ikinciOdeme: {},          // dönem bazlı — umit_erp_<donemId>_ikinciOdeme_v1 ({sicil:{ga,rapor,sert,kira,banka}})
 };
 
 /** Abonelik: belirli bir state anahtarı değiştiğinde cb çalışır. */
