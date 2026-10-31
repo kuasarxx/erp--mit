@@ -15,10 +15,10 @@ import './pages/anasayfa.js';
 import './pages/puantaj.js';
 import './pages/avans.js';
 import './pages/mesai.js';
+import './pages/ekstra.js';
+import './pages/kesinti.js';
 
 // Diğer sayfalar tek tek eklenecek (adım adım plan):
-// import './pages/ekstra.js';
-// import './pages/kesinti.js';
 // import './pages/icra.js';
 // import './pages/ikinciOdeme.js';
 // import './pages/muhasebe.js';
